@@ -1,58 +1,243 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Site Simples</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      background: #222;
-      color: white;
-      padding: 20px;
-    }
-    h1 {
-      margin: 0;
-    }
-    main {
-      padding: 40px;
-    }
-    footer {
-      background: #222;
-      color: white;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    a {
-      color: #1e90ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SatoshiJr — The Meme Heir of Bitcoin</title>
+<meta name="description" content="SatoshiJr (SATJR) — fixed 21B supply on BNB Chain. Meme culture, community and transparent tokenomics.">
+<style>
+  :root{
+    --bg:#0f172a;        /* slate-900 */
+    --panel:#0b1224;     /* deep panel */
+    --txt:#e5e7eb;       /* slate-200 */
+    --muted:#9ca3af;     /* slate-400 */
+    --brand:#f59e0b;     /* amber */
+    --brand-2:#111827;   /* near black */
+    --pill:#ffe8b3;
+    --card:#0c1a33;
+    --ok:#16a34a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:linear-gradient(180deg,#0a1020,#0a1228 30%,#0b1834);color:var(--txt)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:30;background:rgba(10,16,32,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav .row{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+  .brand .logo{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#111}
+  .ticker{background:var(--pill);color:#8a5800;font-weight:800;border-radius:999px;padding:4px 10px;margin-left:8px}
+  .nav a.btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.1);margin-left:10px}
+  .btn.primary{background:var(--brand);color:#1b1200;border:0;font-weight:800}
+  .navlinks{display:none;gap:18px}
+  @media(min-width:840px){.navlinks{display:flex}}
+  /* HERO */
+  .hero{padding:56px 0 28px}
+  .hero .grid{display:grid;gap:28px;align-items:center}
+  @media(min-width:940px){.hero .grid{grid-template-columns:1.1fr .9fr}}
+  .title{font-size:clamp(28px,6vw,48px);line-height:1.05;margin:0 0 12px;font-weight:900}
+  .lead{color:var(--muted);font-size:18px}
+  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 6px}
+  .cta{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12)}
+  .cta.primary{background:var(--brand);color:#1b1200;border:0;font-weight:800}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
+  .stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:12px 16px;border-radius:14px}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:999px}
+  .badge.ok{background:rgba(22,163,74,.15);color:#86efac}
+  .poster{background:radial-gradient(120% 120% at 80% 0%, rgba(255,255,255,.12), rgba(0,0,0,0));border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:16px;display:grid;place-items:center}
+  .poster .card{background:#11161f;border-radius:18px;padding:14px 14px 6px;border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  .poster svg{display:block;height:auto;width:100%;max-width:420px}
+  /* FEATURES */
+  .features{display:grid;gap:14px;margin:30px 0}
+  @media(min-width:880px){.features{grid-template-columns:repeat(3,1fr)}}
+  .feat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:18px;border-radius:16px}
+  .feat h3{margin:0 0 6px}
+  .feat p{margin:0;color:var(--muted)}
+  /* SECTION */
+  section{padding:26px 0}
+  section h2{font-size:28px;margin:0 0 14px}
+  /* TOKENOMICS */
+  .tok{display:grid;gap:24px}
+  @media(min-width:900px){.tok{grid-template-columns:1fr 1.1fr}}
+  .legend li{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;margin-bottom:10px}
+  .dot{inline-size:12px;block-size:12px;border-radius:50%;display:inline-block;margin-right:8px}
+  .blue{background:#60a5fa}.orange{background:#f59e0b}.purple{background:#a78bfa}.green{background:#34d399}.yellow{background:#fcd34d}
+  .contract{color:var(--muted);font-size:14px;margin-top:8px}
+  /* HOW TO BUY + ROADMAP */
+  .steps{display:grid;gap:14px}
+  @media(min-width:840px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step,.phase{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:16px;border-radius:16px}
+  .road{display:grid;gap:14px}
+  @media(min-width:980px){.road{grid-template-columns:repeat(4,1fr)}}
+  .phase h4{margin:0 0 8px}
+  .phase ul{margin:0;padding-left:18px;color:var(--muted)}
+  /* FOOTER */
+  footer{border-top:1px solid rgba(255,255,255,.08);padding:20px 0;color:#94a3b8}
+  .small{font-size:13px;color:#9aa3b2}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Bem-vindo ao meu site 🚀</h1>
-  </header>
 
-  <main>
-    <h2>Esse é meu primeiro site no GitHub Pages</h2>
-    <p>Simples, rápido e gratuito!</p>
-    <p>Feito com <strong>HTML + CSS</strong></p>
-  </main>
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap row">
+    <div class="brand">
+      <span class="logo">🟧</span>
+      SatoshiJr
+      <span class="ticker">SATJR</span>
+    </div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#howtobuy">How to Buy</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+    <div>
+      <a class="btn" href="#whitepaper">Whitepaper</a>
+      <a class="btn primary" href="#buy">Buy SATJR</a>
+    </div>
+  </div>
+</nav>
 
-  <footer>
-    <p>© 2025 - Criado por Mim</p>
-  </footer>
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap grid">
+    <div>
+      <h1 class="title">SatoshiJr — The Meme Heir of Bitcoin</h1>
+      <p class="lead">Fixed supply of <b>21,000,000,000</b> tokens (SATJR) on BNB Smart Chain (BEP-20). Accessible price, meme culture and full on-chain transparency.</p>
+      <div class="ctas">
+        <a class="cta primary" id="buy" href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">Buy on PancakeSwap</a>
+        <a class="cta" href="https://bscscan.com/" target="_blank" rel="noreferrer">View on BscScan</a>
+      </div>
+      <div class="stats">
+        <span class="stat"><b>21,000,000,000</b><br><span class="small">TOTAL SUPPLY</span></span>
+        <span class="stat"><b>BNB</b><br><span class="small">NETWORK</span></span>
+        <span class="stat badge ok">NO FEES</span>
+      </div>
+    </div>
+    <div class="poster">
+      <div class="card" aria-hidden="true">
+        <!-- Inline SVG avatar placeholder (troque por <img src="avatar.png"> se quiser) -->
+        <svg viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#1f2937" offset="0"/>
+              <stop stop-color="#0b1224" offset="1"/>
+            </linearGradient>
+          </defs>
+          <rect rx="16" ry="16" x="0" y="0" width="360" height="420" fill="url(#g)"/>
+          <circle cx="180" cy="165" r="110" fill="#111827" stroke="#f59e0b" stroke-width="6"/>
+          <circle cx="140" cy="155" r="14" fill="#fff"/><circle cx="220" cy="155" r="14" fill="#fff"/>
+          <path d="M120 140 q20-30 60-30 q40 0 60 30" stroke="#a16207" stroke-width="8" fill="none"/>
+          <path d="M120 210 q60 36 120 0" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <rect x="85" y="250" width="190" height="120" rx="60" fill="#f59e0b"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<div class="wrap features" id="about">
+  <div class="feat">
+    <h3>Supply & Scarcity</h3>
+    <p>Fixed total supply of <b>21&nbsp;billion</b> — no future mint. Suggested initial circulating: <b>5–20%</b>.</p>
+  </div>
+  <div class="feat">
+    <h3>Simple, trusted contract</h3>
+    <p>No fees, no blacklist, no mint functions. OpenZeppelin-based code, verified on BscScan.</p>
+  </div>
+  <div class="feat">
+    <h3>Mission</h3>
+    <p>Turn every holder into a “heir of Satoshi” with humor, community and future utility.</p>
+  </div>
+</div>
+
+<!-- TOKENOMICS -->
+<section id="tokenomics">
+  <div class="wrap">
+    <h2>Tokenomics</h2>
+    <div class="tok">
+      <div>
+        <!-- Donut chart in SVG (cores batem com a legenda) -->
+        <svg viewBox="0 0 220 220" width="220" height="220" aria-label="Tokenomics chart">
+          <circle cx="110" cy="110" r="90" stroke="#1f2937" stroke-width="24" fill="none"/>
+          <g transform="rotate(-90 110 110)">
+            <!-- 40% -->
+            <circle cx="110" cy="110" r="90" stroke="#60a5fa" stroke-width="24" fill="none"
+                    stroke-dasharray="226.19 339.29" stroke-linecap="butt"/>
+            <!-- 20% -->
+            <circle cx="110" cy="110" r="90" stroke="#f59e0b" stroke-width="24" fill="none"
+                    stroke-dasharray="113.09 452.39" stroke-dashoffset="-226.19"/>
+            <!-- 20% -->
+            <circle cx="110" cy="110" r="90" stroke="#a78bfa" stroke-width="24" fill="none"
+                    stroke-dasharray="113.09 452.39" stroke-dashoffset="-339.28"/>
+            <!-- 10% -->
+            <circle cx="110" cy="110" r="90" stroke="#34d399" stroke-width="24" fill="none"
+                    stroke-dasharray="56.55 508.93" stroke-dashoffset="-452.37"/>
+            <!-- 10% -->
+            <circle cx="110" cy="110" r="90" stroke="#fcd34d" stroke-width="24" fill="none"
+                    stroke-dasharray="56.55 508.93" stroke-dashoffset="-508.92"/>
+          </g>
+          <circle cx="110" cy="110" r="58" fill="#0b1224"/>
+          <text x="110" y="106" text-anchor="middle" fill="#e5e7eb" font-size="18" font-weight="800">Tokenomics</text>
+          <text x="110" y="126" text-anchor="middle" fill="#9ca3af" font-size="12">40/20/20/10/10</text>
+        </svg>
+      </div>
+      <div>
+        <ul class="legend" role="list">
+          <li><span><span class="dot blue"></span>Liquidity</span><b>40%</b></li>
+          <li><span><span class="dot orange"></span>Marketing / Community</span><b>20%</b></li>
+          <li><span><span class="dot purple"></span>Team / Dev</span><b>20%</b></li>
+          <li><span><span class="dot green"></span>Rewards / Staking</span><b>10%</b></li>
+          <li><span><span class="dot yellow"></span>Reserve</span><b>10%</b></li>
+        </ul>
+        <div class="contract">Contract: <code>0xYOUR_CONTRACT_HERE</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section id="howtobuy">
+  <div class="wrap">
+    <h2>How to Buy</h2>
+    <div class="steps">
+      <div class="step"><b>1.</b> Install <a href="https://metamask.io" target="_blank" rel="noreferrer">MetaMask</a>, add the <b>BNB Smart Chain</b> network and load a bit of BNB.</div>
+      <div class="step"><b>2.</b> Open <a href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">PancakeSwap</a> and connect your wallet. Paste the SATJR contract address.</div>
+      <div class="step"><b>3.</b> Select the <b>SATJR/BNB</b> pair, set the amount and confirm the swap.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <h2>Roadmap</h2>
+    <div class="road">
+      <div class="phase"><h4>Phase 1</h4><ul>
+        <li>Contract deploy</li><li>PancakeSwap</li><li>Site + Whitepaper</li>
+      </ul></div>
+      <div class="phase"><h4>Phase 2</h4><ul>
+        <li>Community & Memes</li><li>Partnerships</li><li>Airdrops</li>
+      </ul></div>
+      <div class="phase"><h4>Phase 3</h4><ul>
+        <li>CoinGecko / CMC</li><li>Staking</li><li>Campaigns</li>
+      </ul></div>
+      <div class="phase"><h4>Phase 4</h4><ul>
+        <li>NFTs & Mini-games</li><li>DeFi integrations</li><li>Expansion</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p id="whitepaper" class="small">Whitepaper: add a link to your PDF or Google Doc here.</p>
+    <p class="small">© 2025 — SatoshiJr (SATJR). This site is a static HTML demo for GitHub Pages / Vercel.</p>
+  </div>
+</footer>
+
 </body>
 </html>
-
