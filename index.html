@@ -6,7 +6,7 @@
   <title>SatoshiJr — The Meme Heir of Bitcoin</title>
   <meta name="description" content="SatoshiJr (SATJR) — fixed 21B supply on BNB Chain. Meme culture, community and transparent tokenomics.">
 
-  <!-- Favicon / ícone -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="satoshi.png">
   <link rel="apple-touch-icon" href="satoshi.png">
 
@@ -79,16 +79,17 @@
     .copy-btn{padding:12px 16px;border:0;border-radius:12px;background:#f59e0b;color:#1b1200;font-weight:800;cursor:pointer}
   </style>
 </head>
-<body>
+<body id="top">
 
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap row">
-    <div class="brand">
+    <!-- LOGO/NOME AGORA É LINK PARA O INÍCIO -->
+    <a href="#top" class="brand">
       <img src="satoshi.png" alt="Logo SatoshiJr">
       SatoshiJr
       <span class="ticker">SATJR</span>
-    </div>
+    </a>
     <div class="navlinks">
       <a href="#about">About</a>
       <a href="#tokenomics">Tokenomics</a>
@@ -110,7 +111,6 @@
       <p class="lead">Fixed supply of <b>21,000,000,000</b> tokens (SATJR) on BNB Smart Chain (BEP-20). Accessible price, meme culture and full on-chain transparency.</p>
       <div class="ctas">
         <a class="cta primary" id="buy" href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">Buy on PancakeSwap</a>
-        <!-- LINK DO BscScan CORRIGIDO -->
         <a class="cta" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noreferrer">View on BscScan</a>
       </div>
       <div class="stats">
@@ -121,18 +121,16 @@
     </div>
     <div class="poster">
       <div class="card">
-        <!-- Imagem real do garoto -->
         <img src="satoshi.png" alt="SatoshiJr Mascot">
       </div>
     </div>
   </div>
 </header>
 
-<!-- OFFICIAL CONTRACT (NOVA SEÇÃO COM COPY) -->
+<!-- OFFICIAL CONTRACT -->
 <section id="contract" class="wrap">
   <h2>Official Contract</h2>
   <p class="small" style="color:#9ca3b2">BNB Smart Chain (BEP-20)</p>
-
   <div class="contract-box">
     <input id="contractAddress" class="contract-input" readonly
            value="0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">
@@ -165,7 +163,7 @@
     <h2>Tokenomics</h2>
     <div class="tok">
       <div>
-        <!-- Donut chart (SVG) -->
+        <!-- Donut chart -->
         <svg viewBox="0 0 220 220" width="220" height="220" aria-label="Tokenomics chart">
           <circle cx="110" cy="110" r="90" stroke="#1f2937" stroke-width="24" fill="none"/>
           <g transform="rotate(-90 110 110)">
@@ -188,7 +186,6 @@
           <li><span><span class="dot green"></span>Rewards / Staking</span><b>10%</b></li>
           <li><span><span class="dot yellow"></span>Reserve</span><b>10%</b></li>
         </ul>
-        <!-- CONTRATO ATUALIZADO AQUI TAMBÉM -->
         <div class="contract">Contract: <code>0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</code></div>
       </div>
     </div>
@@ -201,7 +198,7 @@
     <h2>How to Buy</h2>
     <div class="steps">
       <div class="step"><b>1.</b> Install <a href="https://metamask.io/" target="_blank" rel="noreferrer">MetaMask</a>, add the <b>BNB Smart Chain</b> network and load a bit of BNB.</div>
-      <div class="step"><b>2.</b> Open <a href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">PancakeSwap</a> and connect your wallet. Paste the SATJR contract address.</div>
+      <div class="step"><b>2.</b> Open <a href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">PancakeSwap</a> and connect your wallet. Paste the contract address: <code>0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</code>.</div>
       <div class="step"><b>3.</b> Select the <b>SATJR/BNB</b> pair, set the amount and confirm the swap.</div>
     </div>
   </div>
@@ -232,30 +229,4 @@
 <footer>
   <div class="wrap">
     <p id="whitepaper" class="small">Whitepaper: add a link to your PDF or Google Doc here.</p>
-    <p class="small">© 2025 — SatoshiJr (SATJR). This site is a static HTML demo for GitHub Pages / Vercel.</p>
-  </div>
-</footer>
-
-<!-- SCRIPT: botão de copiar -->
-<script>
-  const CONTRACT = '0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54';
-  const copyBtn = document.getElementById('copyBtn');
-  const addrInput = document.getElementById('contractAddress');
-
-  if (copyBtn && addrInput) {
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(CONTRACT);
-        copyBtn.textContent = 'Copied!';
-        setTimeout(() => copyBtn.textContent = 'Copy', 1200);
-      } catch (e) {
-        addrInput.select();
-        document.execCommand('copy');
-        alert('Contract copied: ' + CONTRACT);
-      }
-    });
-  }
-</script>
-
-</body>
-</html>
+    <p class="small">© 2025 — SatoshiJr (SATJR). This site is a static HTML demo for GitHub Pages / Vercel.</p
