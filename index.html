@@ -72,8 +72,7 @@
     /* FOOTER */
     footer{border-top:1px solid rgba(255,255,255,.08);padding:20px 0;color:#94a3b8}
     .small{font-size:13px;color:#9aa3b2}
-
-    /* CONTRACT SECTION (Copy button styles) */
+    /* CONTRACT SECTION */
     .contract-box{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
     .contract-input{flex:1;min-width:280px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#e5e7eb}
     .copy-btn{padding:12px 16px;border:0;border-radius:12px;background:#f59e0b;color:#1b1200;font-weight:800;cursor:pointer}
@@ -84,7 +83,6 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap row">
-    <!-- LOGO/NOME AGORA É LINK PARA O INÍCIO -->
     <a href="#top" class="brand">
       <img src="satoshi.png" alt="Logo SatoshiJr">
       SatoshiJr
@@ -97,7 +95,8 @@
       <a href="#roadmap">Roadmap</a>
     </div>
     <div>
-      <a class="btn" href="#whitepaper">Whitepaper</a>
+      <!-- Whitepaper no menu -->
+      <a class="btn" href="whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
       <a class="btn primary" href="#buy">Buy SATJR</a>
     </div>
   </div>
@@ -228,5 +227,14 @@
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
-    <p id="whitepaper" class="small">Whitepaper: add a link to your PDF or Google Doc here.</p>
-    <p class="small">© 2025 — SatoshiJr (SATJR). This site is a static HTML demo for GitHub Pages / Vercel.</p
+    <!-- Whitepaper no rodapé -->
+    <p id="whitepaper" class="small">
+      📄 <a href="whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper (PDF)</a>
+    </p>
+    <p class="small">© 2025 — SatoshiJr (SATJR). This site is a static HTML demo for GitHub Pages / Vercel.</p>
+  </div>
+</footer>
+
+<!-- SCRIPT: botão copiar contrato -->
+<script>
+  const CONTRACT =
