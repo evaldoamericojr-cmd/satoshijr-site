@@ -5,20 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SatoshiJr — The Meme Heir of Bitcoin</title>
   <meta name="description" content="SatoshiJr (SATJR) — fixed 21B supply on BNB Chain. Meme culture, community and transparent tokenomics.">
-
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="satoshi.png">
   <link rel="apple-touch-icon" href="satoshi.png">
-
   <style>
-    :root{
-      --bg:#0f172a; --panel:#0b1224; --txt:#e5e7eb; --muted:#9ca3af;
+    :root{ --bg:#0f172a; --panel:#0b1224; --txt:#e5e7eb; --muted:#9ca3af;
       --brand:#f59e0b; --brand-2:#111827; --pill:#ffe8b3; --card:#0c1a33; --ok:#16a34a;
     }
     *{box-sizing:border-box}
     html,body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:linear-gradient(180deg,#0a1020,#0a1228 30%,#0b1834);color:var(--txt)}
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
     /* NAV */
     .nav{position:sticky;top:0;z-index:30;background:rgba(10,16,32,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav .row{display:flex;align-items:center;justify-content:space-between;height:64px}
@@ -29,6 +27,7 @@
     .btn.primary{background:var(--brand);color:#1b1200;border:0;font-weight:800}
     .navlinks{display:none;gap:18px}
     @media(min-width:840px){.navlinks{display:flex}}
+
     /* HERO */
     .hero{padding:56px 0 28px}
     .hero .grid{display:grid;gap:28px;align-items:center}
@@ -45,15 +44,18 @@
     .poster{background:radial-gradient(120% 120% at 80% 0%, rgba(255,255,255,.12), rgba(0,0,0,0));border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:16px;display:grid;place-items:center}
     .poster .card{background:#11161f;border-radius:18px;padding:14px;border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 40px rgba(0,0,0,.35)}
     .poster img{display:block;max-width:420px;height:auto;border-radius:18px}
+
     /* FEATURES */
     .features{display:grid;gap:14px;grid-template-columns:repeat(3, minmax(0,1fr));margin:30px 0;align-items:stretch;}
     @media(max-width:880px){.features{grid-template-columns:1fr}}
     .feat{display:flex;flex-direction:column;justify-content:flex-start;min-height:140px;padding:18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);}
     .feat h3{margin:0 0 8px;line-height:1.1}
     .feat p{margin:0;color:var(--muted);line-height:1.45}
+
     /* SECTION */
     section{padding:26px 0}
     section h2{font-size:28px;margin:0 0 14px}
+
     /* TOKENOMICS */
     .tok{display:grid;gap:24px}
     @media(min-width:900px){.tok{grid-template-columns:1fr 1.1fr}}
@@ -61,6 +63,7 @@
     .dot{inline-size:12px;block-size:12px;border-radius:50%;display:inline-block;margin-right:8px}
     .blue{background:#60a5fa}.orange{background:#f59e0b}.purple{background:#a78bfa}.green{background:#34d399}.yellow{background:#fcd34d}
     .contract{color:var(--muted);font-size:14px;margin-top:8px}
+
     /* HOW TO BUY + ROADMAP */
     .steps{display:grid;gap:14px}
     @media(min-width:840px){.steps{grid-template-columns:repeat(3,1fr)}}
@@ -69,9 +72,11 @@
     @media(min-width:980px){.road{grid-template-columns:repeat(4,1fr)}}
     .phase h4{margin:0 0 8px}
     .phase ul{margin:0;padding-left:18px;color:var(--muted)}
+
     /* FOOTER */
     footer{border-top:1px solid rgba(255,255,255,.08);padding:20px 0;color:#94a3b8}
     .small{font-size:13px;color:#9aa3b2}
+
     /* CONTRACT SECTION */
     .contract-box{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px}
     .contract-input{flex:1;min-width:280px;height:44px;line-height:44px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#e5e7eb}
@@ -80,201 +85,218 @@
   </style>
 </head>
 <body id="top">
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="wrap row">
-    <a href="#top" class="brand">
-      <img src="satoshi.png" alt="Logo SatoshiJr">
-      SatoshiJr
-      <span class="ticker">SATJR</span>
-    </a>
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="#howtobuy">How to Buy</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#team">Team</a>
-    </div>
-    <div>
-      <a class="btn" href="whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
-      <a class="btn primary" href="#buy">Buy SATJR</a>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap grid">
-    <div>
-      <h1 class="title">SatoshiJr — The Meme Heir of Bitcoin</h1>
-      <p class="lead">Fixed supply of <b>21,000,000,000</b> tokens (SATJR) on BNB Smart Chain (BEP-20). Accessible price, meme culture and full on-chain transparency.</p>
-      <div class="ctas">
-        <a class="cta primary" id="buy" href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">Buy on PancakeSwap</a>
-        <a class="cta" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noreferrer">View on BscScan</a>
-      </div>
-      <div class="stats">
-        <span class="stat"><b>21,000,000,000</b><br><span class="small">TOTAL SUPPLY</span></span>
-        <span class="stat"><b>BNB</b><br><span class="small">NETWORK</span></span>
-        <span class="stat badge ok">NO FEES</span>
-      </div>
-    </div>
-    <div class="poster">
-      <div class="card">
-        <img src="satoshi.png" alt="SatoshiJr Mascot">
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- OFFICIAL CONTRACT -->
-<section id="contract" class="wrap">
-  <h2>Official Contract</h2>
-  <p class="small" style="color:#9ca3b2">BNB Smart Chain (BEP-20)</p>
-  <div class="contract-box">
-    <input id="contractAddress" class="contract-input" readonly
-           value="0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">
-    <button id="copyBtn" class="copy-btn">Copy</button>
-    <a id="bscscanBtn"
-       href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54"
-       target="_blank" rel="noreferrer" class="cta">View on BscScan</a>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="about">
-  <div class="wrap">
-    <div class="features">
-      <div class="feat">
-        <h3>Supply & Scarcity</h3>
-        <p>Fixed total supply of <b>21&nbsp;billion</b> — no future mint. Suggested initial circulating: <b>5–20%</b>.</p>
-      </div>
-      <div class="feat">
-        <h3>Simple, trusted contract</h3>
-        <p>No fees, no blacklist, no mint functions. OpenZeppelin-based code, verified on BscScan.</p>
-      </div>
-      <div class="feat">
-        <h3>Mission</h3>
-        <p>Turn every holder into a “heir of Satoshi” with humor, community and future utility.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TOKENOMICS -->
-<section id="tokenomics">
-  <div class="wrap">
-    <h2>Tokenomics</h2>
-    <div class="tok">
-      <div>
-        <!-- Donut chart -->
-        <svg viewBox="0 0 220 220" width="220" height="220" aria-label="Tokenomics chart">
-          <circle cx="110" cy="110" r="90" stroke="#1f2937" stroke-width="24" fill="none"/>
-          <g transform="rotate(-90 110 110)">
-            <circle cx="110" cy="110" r="90" stroke="#60a5fa" stroke-width="24" fill="none" stroke-dasharray="226.19 339.29"/>
-            <circle cx="110" cy="110" r="90" stroke="#f59e0b" stroke-width="24" fill="none" stroke-dasharray="113.09 452.39" stroke-dashoffset="-226.19"/>
-            <circle cx="110" cy="110" r="90" stroke="#a78bfa" stroke-width="24" fill="none" stroke-dasharray="113.09 452.39" stroke-dashoffset="-339.28"/>
-            <circle cx="110" cy="110" r="90" stroke="#34d399" stroke-width="24" fill="none" stroke-dasharray="56.55 508.93" stroke-dashoffset="-452.37"/>
-            <circle cx="110" cy="110" r="90" stroke="#fcd34d" stroke-width="24" fill="none" stroke-dasharray="56.55 508.93" stroke-dashoffset="-508.92"/>
-          </g>
-          <circle cx="110" cy="110" r="58" fill="#0b1224"/>
-          <text x="110" y="106" text-anchor="middle" fill="#e5e7eb" font-size="18" font-weight="800">Tokenomics</text>
-          <text x="110" y="126" text-anchor="middle" fill="#9ca3af" font-size="12">40/20/20/10/10</text>
-        </svg>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap row">
+      <a href="#top" class="brand">
+        <img src="satoshi.png" alt="Logo SatoshiJr">
+        SatoshiJr
+        <span class="ticker">SATJR</span>
+      </a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#howtobuy">How to Buy</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#team">Team</a>
       </div>
       <div>
-        <ul class="legend" role="list">
-          <li><span><span class="dot blue"></span>Liquidity</span><b>40%</b></li>
-          <li><span><span class="dot orange"></span>Marketing / Community</span><b>20%</b></li>
-          <li><span><span class="dot purple"></span>Team / Dev</span><b>20%</b></li>
-          <li><span><span class="dot green"></span>Rewards / Staking</span><b>10%</b></li>
-          <li><span><span class="dot yellow"></span>Reserve</span><b>10%</b></li>
-        </ul>
-        <div class="contract">Contract: <code>0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</code></div>
+        <a class="btn" href="whitepaper.pdf" target="_blank" rel="noopener noreferrer">Whitepaper</a>
+        <a class="btn primary" href="#buy">Buy SATJR</a>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- HOW TO BUY -->
-<section id="howtobuy">
-  <div class="wrap">
-    <h2>How to Buy</h2>
-    <div class="steps">
-      <div class="step"><b>1.</b> Install <a href="https://metamask.io/" target="_blank" rel="noreferrer">MetaMask</a>, add the <b>BNB Smart Chain</b> network and load a bit of BNB.</div>
-      <div class="step"><b>2.</b> Open <a href="https://pancakeswap.finance/" target="_blank" rel="noreferrer">PancakeSwap</a> and connect your wallet. Paste the contract address: <code>0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</code>.</div>
-      <div class="step"><b>3.</b> Select the <b>SATJR/BNB</b> pair, set the amount and confirm the swap.</div>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap grid">
+      <div>
+        <h1 class="title">SatoshiJr — The Meme Heir of Bitcoin</h1>
+        <p class="lead">Fixed supply of <b>21,000,000,000</b> tokens (SATJR) on BNB Smart Chain (BEP-20). Accessible price, meme culture and full on-chain transparency.</p>
+
+        <div class="ctas">
+          <!-- LINK CORRIGIDO: Swap direto com SATJR carregado -->
+          <a class="cta primary" id="buy"
+             href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54&chainId=56"
+             target="_blank" rel="noopener noreferrer">
+             🚀 Buy on PancakeSwap
+          </a>
+
+          <!-- LINK CORRIGIDO: BscScan do token -->
+          <a class="cta"
+             href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54"
+             target="_blank" rel="noopener noreferrer">
+             View on BscScan
+          </a>
+        </div>
+
+        <div class="stats">
+          <span class="stat"><b>21,000,000,000</b><br><span class="small">TOTAL SUPPLY</span></span>
+          <span class="stat"><b>BNB</b><br><span class="small">NETWORK</span></span>
+          <span class="stat badge ok">NO FEES</span>
+        </div>
+      </div>
+
+      <div class="poster">
+        <div class="card">
+          <img src="satoshi.png" alt="SatoshiJr Mascot">
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ROADMAP -->
-<section id="roadmap">
-  <div class="wrap">
-    <h2>Roadmap</h2>
-    <div class="road">
-      <div class="phase"><h4>Phase 1</h4><ul>
-        <li>Contract deploy</li><li>PancakeSwap</li><li>Site + Whitepaper</li>
-      </ul></div>
-      <div class="phase"><h4>Phase 2</h4><ul>
-        <li>Community & Memes</li><li>Partnerships</li><li>Airdrops</li>
-      </ul></div>
-      <div class="phase"><h4>Phase 3</h4><ul>
-        <li>CoinGecko / CMC</li><li>Staking</li><li>Campaigns</li>
-      </ul></div>
-      <div class="phase"><h4>Phase 4</h4><ul>
-        <li>NFTs & Mini-games</li><li>DeFi integrations</li><li>Expansion</li>
-      </ul></div>
+  <!-- OFFICIAL CONTRACT -->
+  <section id="contract" class="wrap">
+    <h2>Official Contract</h2>
+    <p class="small" style="color:#9ca3b2">BNB Smart Chain (BEP-20)</p>
+
+    <div class="contract-box">
+      <input id="contractAddress" class="contract-input" readonly
+             value="0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">
+      <button id="copyBtn" class="copy-btn">Copy</button>
+      <a id="bscscanBtn"
+         href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54"
+         target="_blank" rel="noopener noreferrer" class="cta">View on BscScan</a>
+      <!-- Atalho extra para compra -->
+      <a class="cta primary"
+         href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54&chainId=56"
+         target="_blank" rel="noopener noreferrer">Buy SATJR</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TEAM -->
-<section id="team" style="padding:60px 20px; background:var(--panel); color:var(--txt); text-align:center;">
-  <h2 style="color:var(--brand); font-size:28px; margin-bottom:30px;">Team</h2>
-  <div style="max-width:700px; margin:0 auto; background:#0f172a; padding:25px; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,0.5);">
-    <h3 style="font-size:20px; margin-bottom:10px;">Evaldo Américo Jr. — Founder &amp; Developer</h3>
-    <p style="font-size:16px; margin-bottom:15px; line-height:1.6;">
-      Founder and developer of <strong>SatoshiJr</strong>, responsible for the token creation, website and community growth.
-    </p>
-    <p class="small" style="margin:0 0 14px; color:#9ca3b2;">
-      Contact: <a href="mailto:team@satoshijr.xyz" style="text-decoration:underline;">team@satoshijr.xyz</a>
-    </p>
-    <a href="https://github.com/evaldoamericojr-cmd" target="_blank"
-       style="color:#3b82f6; text-decoration:none; font-weight:bold;">
-       🔗 GitHub Profile
-    </a>
-  </div>
-</section>
+  <!-- FEATURES -->
+  <section id="about">
+    <div class="wrap">
+      <div class="features">
+        <div class="feat">
+          <h3>Supply & Scarcity</h3>
+          <p>Fixed total supply of <b>21&nbsp;billion</b> — no future mint. Suggested initial circulating: <b>5–20%</b>.</p>
+        </div>
+        <div class="feat">
+          <h3>Simple, trusted contract</h3>
+          <p>No fees, no blacklist, no mint functions. OpenZeppelin-based code, verified on BscScan.</p>
+        </div>
+        <div class="feat">
+          <h3>Mission</h3>
+          <p>Turn every holder into a “heir of Satoshi” with humor, community and future utility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <p class="small">© 2025 SatoshiJr — The Meme Heir of Bitcoin • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.</p>
-  </div>
-</footer>
+  <!-- TOKENOMICS -->
+  <section id="tokenomics">
+    <div class="wrap">
+      <h2>Tokenomics</h2>
+      <div class="tok">
+        <div>
+          <!-- Donut chart -->
+          <svg viewBox="0 0 220 220" width="220" height="220" aria-label="Tokenomics chart">
+            <circle cx="110" cy="110" r="90" stroke="#1f2937" stroke-width="24" fill="none"/>
+            <g transform="rotate(-90 110 110)">
+              <circle cx="110" cy="110" r="90" stroke="#60a5fa" stroke-width="24" fill="none" stroke-dasharray="226.19 339.29"/>
+              <circle cx="110" cy="110" r="90" stroke="#f59e0b" stroke-width="24" fill="none" stroke-dasharray="113.09 452.39" stroke-dashoffset="-226.19"/>
+              <circle cx="110" cy="110" r="90" stroke="#a78bfa" stroke-width="24" fill="none" stroke-dasharray="113.09 452.39" stroke-dashoffset="-339.28"/>
+              <circle cx="110" cy="110" r="90" stroke="#34d399" stroke-width="24" fill="none" stroke-dasharray="56.55 508.93" stroke-dashoffset="-452.37"/>
+              <circle cx="110" cy="110" r="90" stroke="#fcd34d" stroke-width="24" fill="none" stroke-dasharray="56.55 508.93" stroke-dashoffset="-508.92"/>
+            </g>
+            <circle cx="110" cy="110" r="58" fill="#0b1224"/>
+            <text x="110" y="106" text-anchor="middle" fill="#e5e7eb" font-size="18" font-weight="800">Tokenomics</text>
+            <text x="110" y="126" text-anchor="middle" fill="#9ca3af" font-size="12">40/20/20/10/10</text>
+          </svg>
+        </div>
+        <div>
+          <ul class="legend" role="list">
+            <li><span><span class="dot blue"></span>Liquidity</span><b>40%</b></li>
+            <li><span><span class="dot orange"></span>Marketing / Community</span><b>20%</b></li>
+            <li><span><span class="dot purple"></span>Team / Dev</span><b>20%</b></li>
+            <li><span><span class="dot green"></span>Rewards / Staking</span><b>10%</b></li>
+            <li><span><span class="dot yellow"></span>Reserve</span><b>10%</b></li>
+          </ul>
+          <div class="contract">Contract: <code>0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- SCRIPTS -->
-<script>
-  // Copy contract button
-  (function(){
-    var btn = document.getElementById('copyBtn');
-    var input = document.getElementById('contractAddress');
-    if(btn && input){
-      btn.addEventListener('click', function(){
-        input.select();
-        input.setSelectionRange(0, 99999);
-        try{
-          document.execCommand('copy');
-          btn.textContent = 'Copied!';
-          setTimeout(function(){ btn.textContent = 'Copy'; }, 1500);
-        }catch(e){
-          btn.textContent = 'Press Ctrl+C';
-        }
-      });
-    }
-  })();
-</script>
+  <!-- HOW TO BUY -->
+  <section id="howtobuy">
+    <div class="wrap">
+      <h2>How to Buy</h2>
+      <div class="steps">
+        <div class="step"><b>1.</b> Install <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a>, add the <b>BNB Smart Chain</b> network and load a bit of BNB.</div>
+        <div class="step"><b>2.</b> Open <a href="https://pancakeswap.finance/" target="_blank" rel="noopener noreferrer">PancakeSwap</a> and connect your wallet. Paste the contract address: <code>0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</code>.</div>
+        <div class="step"><b>3.</b> Or go straight to the swap: <a href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54&chainId=56" target="_blank" rel="noopener noreferrer"><b>Swap SATJR/BNB</b></a>.</div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="wrap">
+      <h2>Roadmap</h2>
+      <div class="road">
+        <div class="phase"><h4>Phase 1</h4><ul>
+          <li>Contract deploy</li><li>PancakeSwap</li><li>Site + Whitepaper</li>
+        </ul></div>
+        <div class="phase"><h4>Phase 2</h4><ul>
+          <li>Community & Memes</li><li>Partnerships</li><li>Airdrops</li>
+        </ul></div>
+        <div class="phase"><h4>Phase 3</h4><ul>
+          <li>CoinGecko / CMC</li><li>Staking</li><li>Campaigns</li>
+        </ul></div>
+        <div class="phase"><h4>Phase 4</h4><ul>
+          <li>NFTs & Mini-games</li><li>DeFi integrations</li><li>Expansion</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" style="padding:60px 20px; background:var(--panel); color:var(--txt); text-align:center;">
+    <h2 style="color:var(--brand); font-size:28px; margin-bottom:30px;">Team</h2>
+    <div style="max-width:700px; margin:0 auto; background:#0f172a; padding:25px; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,0.5);">
+      <h3 style="font-size:20px; margin-bottom:10px;">Evaldo Américo Jr. — Founder &amp; Developer</h3>
+      <p style="font-size:16px; margin-bottom:15px; line-height:1.6;">
+        Founder and developer of <strong>SatoshiJr</strong>, responsible for the token creation, website and community growth.
+      </p>
+      <p class="small" style="margin:0 0 14px; color:#9ca3b2;">
+        Contact: <a href="mailto:team@satoshijr.xyz" style="text-decoration:underline;">team@satoshijr.xyz</a>
+      </p>
+      <a href="https://github.com/evaldoamericojr-cmd" target="_blank"
+         style="color:#3b82f6; text-decoration:none; font-weight:bold;">
+         🔗 GitHub Profile
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <p class="small">© 2025 SatoshiJr — The Meme Heir of Bitcoin • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Copy contract button
+    (function(){
+      var btn = document.getElementById('copyBtn');
+      var input = document.getElementById('contractAddress');
+      if(btn && input){
+        btn.addEventListener('click', function(){
+          input.select();
+          input.setSelectionRange(0, 99999);
+          try{
+            document.execCommand('copy');
+            btn.textContent = 'Copied!';
+            setTimeout(function(){ btn.textContent = 'Copy'; }, 1500);
+          }catch(e){
+            btn.textContent = 'Press Ctrl+C';
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
