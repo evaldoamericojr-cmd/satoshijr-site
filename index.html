@@ -5,8 +5,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SatoshiJr — The meme heir</title>
   <meta name="description" content="SatoshiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs." />
+
+  <!-- Icons -->
   <link rel="icon" type="image/png" href="satoshi.png" />
   <link rel="apple-touch-icon" href="satoshi.png" />
+
+  <!-- SEO/Share (não altera o visual) -->
+  <link rel="canonical" href="https://satoshijr.xyz/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SatoshiJr — The meme heir">
+  <meta property="og:description" content="Community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs.">
+  <meta property="og:url" content="https://satoshijr.xyz/">
+  <meta property="og:image" content="https://satoshijr.xyz/satoshi.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@satoshijrcoin">
+  <meta name="theme-color" content="#0f172a">
+
   <style>
     :root{
       --bg:#0f172a; --panel:#0b1224; --txt:#e5e7eb; --muted:#9ca3af;
@@ -22,6 +37,9 @@
     }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
+    a:focus-visible,.btn:focus-visible,.btn-small:focus-visible,.burger:focus-visible{
+      outline:2px solid var(--brand);outline-offset:2px
+    }
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
     /* Header */
@@ -63,8 +81,11 @@
       border:1px solid var(--stroke);border-radius:12px;padding:8px 12px;max-width:100%;
     }
     .contract-label{font-size:12px;color:var(--muted)}
-    .contract-address{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .contract-address{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace
+    }
     .chip{background:var(--brand);color:#1a1305;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px}
+
     .btn-small{padding:6px 10px;border-radius:999px;border:1px solid var(--brand)}
     .btn-buy{border-color:var(--ok)}
     .btn-buy:hover{background:var(--ok);color:#051b10}
@@ -82,7 +103,6 @@
 
     /* Sections */
     section{padding:40px 0}
-    /* Evita que o título fique escondido sob o header ao clicar nas âncoras */
     section[id]{scroll-margin-top:90px}
     h2{margin:0 0 16px;font-size:24px}
     .title-brand{color:var(--brand);text-align:center;margin-bottom:16px}
@@ -102,11 +122,34 @@
     /* Lists & steps */
     .tok-list{display:grid;gap:10px}
     .tok-item{
-      display:flex;justify-content:space-between;align-items:center;
+      display:flex;align-items:center;gap:12px;
       background:#0d1731;border:1px solid var(--stroke);
       border-radius:12px;padding:12px 14px
     }
-    .pill{background:var(--brand);color:#1a1305;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px}
+    /* Duas colunas: label + valor */
+    .tok-item > span:first-child{flex:0 0 140px}
+    .tok-item > span:last-child{
+      flex:1;display:flex;align-items:center;gap:8px;justify-content:flex-end
+    }
+    /* Endereço com ellipsis no desktop */
+    .tok-item .contract-address{
+      display:inline-block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%
+    }
+    /* Mobile */
+    @media (max-width:540px){
+      .tok-item > span:first-child{flex:0 0 110px}
+      .tok-item > span:last-child{justify-content:flex-start;flex-wrap:wrap}
+      .tok-item .contract-address{white-space:normal;word-break:break-all}
+    }
+
+    /* Pílula do Ticker — corrigido para NÃO esticar */
+    .pill{
+      background:var(--brand);color:#1a1305;border-radius:999px;
+      padding:6px 10px;font-weight:800;font-size:12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      flex:0 0 auto; width:auto; max-width:max-content;
+    }
+
     .muted{color:var(--muted)}
     .step{display:flex;gap:12px;align-items:flex-start}
     .step-num{min-width:28px;height:28px;border-radius:999px;background:var(--brand);color:#1a1305;font-weight:900;display:flex;align-items:center;justify-content:center}
@@ -140,24 +183,24 @@
   <!-- HEADER -->
   <header>
     <div class="container nav">
-      <!-- Ícone/brand é o BOTÃO HOME -->
       <a class="brand-link" href="#home" aria-label="Go to Home">
-        <img src="satoshi.png" alt="SatoshiJr logo" />
+        <img src="satoshi.png" alt="SatoshiJr logo" width="34" height="34" loading="eager" decoding="async"/>
         <span class="brand-txt">
           <span class="brand-name">SatoshiJr</span>
           <span class="brand-tag">The meme heir</span>
         </span>
       </a>
-      <button class="burger" aria-label="Open menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+
+      <button class="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+
       <nav id="menu" class="menu">
-        <!-- NOVO botão Home -->
-        <a href="#home" aria-label="Go to Home">Home</a>
+        <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#tokenomics">Tokenomics</a>
         <a href="#howto">How to Buy</a>
         <a href="#whitepaper">Whitepaper</a>
         <a href="#team">Team</a>
-        <a href="https://x.com/satoshijrcoin" target="_blank" rel="noopener" aria-label="Open our profile on X">X&nbsp;@satoshijrcoin</a>
+        <a href="https://x.com/satoshijrcoin" target="_blank" rel="noopener">X&nbsp;@satoshijrcoin</a>
       </nav>
     </div>
   </header>
@@ -168,12 +211,15 @@
       <span class="chip">SATJR</span>
       <div class="contract-box">
         <span class="contract-label">Contract:</span>
-        <a id="contractLink" class="contract-address" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
+        <a id="contractLink" class="contract-address"
+           href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54"
+           target="_blank" rel="noopener">
           <span id="contractText">0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</span>
         </a>
-        <button class="btn-small" id="copyTop" type="button" aria-label="Copy contract">Copy</button>
+        <button class="btn-small" id="copyTop" type="button">Copy</button>
       </div>
-      <a class="btn-small btn-buy" id="buyBtn" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Buy</a>
+      <a class="btn-small btn-buy" id="buyBtn" target="_blank" rel="noopener"
+         href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Buy</a>
     </div>
   </div>
 
@@ -181,7 +227,7 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <main>
-    <!-- HOME / HERO -->
+    <!-- HERO -->
     <section id="home" class="hero">
       <div class="container hero-grid">
         <div>
@@ -196,7 +242,7 @@
           </div>
         </div>
         <div class="center">
-          <img src="satoshi.png" alt="SatoshiJr mascot" />
+          <img src="satoshi.png" alt="SatoshiJr mascot" width="440" height="440" loading="eager" decoding="async" />
           <div class="sp-8"></div>
           <small class="muted">Your friendly meme mascot — independent and community-led.</small>
         </div>
@@ -212,20 +258,23 @@
           <p>There are no guarantees or expectations of profit. The goal is to foster a positive meme culture, make everything clear and public (distribution, treasury, liquidity), and let utilities and initiatives evolve with community input.</p>
           <p class="muted">SatoshiJr is an independent project not affiliated with any other cryptocurrencies, brands, or trademarks.</p>
         </div>
+
         <div class="card">
           <h2>Quick facts</h2>
           <ul class="tok-list" style="list-style:none;padding:0;margin:0">
-            <li class="tok-item"><span>Ticker</span><span class="pill">SATJR</span></li>
+            <li class="tok-item"><span>Ticker</span><span><span class="pill">SATJR</span></span></li>
             <li class="tok-item"><span>Network</span><span>BNB Chain (BEP-20)</span></li>
             <li class="tok-item"><span>Fixed Supply</span><span>21,000,000,000 SATJR</span></li>
             <li class="tok-item"><span>Decimals</span><span>18</span></li>
             <li class="tok-item">
               <span>Contract</span>
               <span>
-                <a id="contractLink2" class="contract-address" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
+                <a id="contractLink2" class="contract-address"
+                   href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54"
+                   target="_blank" rel="noopener">
                   <span id="contractInline">0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</span>
                 </a>
-                <button class="btn-small" id="copyInline" type="button" aria-label="Copy contract (quick facts)">Copy</button>
+                <button class="btn-small" id="copyInline" type="button">Copy</button>
               </span>
             </li>
           </ul>
@@ -274,7 +323,8 @@
             <div>
               <p class="muted">Tip: start with a small test swap to ensure the contract and liquidity are correct.</p>
               <div class="sp-16"></div>
-              <a class="btn" id="openDex" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Open PancakeSwap</a>
+              <a class="btn" id="openDex" target="_blank" rel="noopener"
+                 href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Open PancakeSwap</a>
             </div>
           </div>
         </div>
@@ -323,7 +373,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="container row" style="align-items:flex-start;gap:12px">
-      <span>© 2025 SatoshiJr — The Meme Heir of Bitcoin • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.</span>
+      <span>© 2025 SatoshiJr — The meme heir • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.</span>
       <a class="right" href="https://x.com/satoshijrcoin" target="_blank" rel="noopener">X / Twitter</a>
     </div>
   </footer>
@@ -344,6 +394,8 @@
     const contractLink2 = document.getElementById('contractLink2');
     const copyInline = document.getElementById('copyInline');
     const openDex = document.getElementById('openDex');
+    const menu = document.getElementById('menu');
+    const burger = document.querySelector('.burger');
 
     // ======= INIT =======
     function initContractBindings(){
@@ -365,7 +417,13 @@
     // ======= COPY =======
     async function copyContract(){
       try{
-        await navigator.clipboard.writeText(CONTRACT);
+        if(navigator.clipboard?.writeText){
+          await navigator.clipboard.writeText(CONTRACT);
+        }else{
+          const ta=document.createElement('textarea');
+          ta.value=CONTRACT; document.body.appendChild(ta);
+          ta.select(); document.execCommand('copy'); ta.remove();
+        }
         showToast('Contract copied!');
       }catch(e){
         showToast('Copy failed', false);
@@ -374,12 +432,17 @@
     copyTop?.addEventListener('click', copyContract);
     copyInline?.addEventListener('click', copyContract);
 
-    // Fechar menu mobile ao clicar
-    document.querySelectorAll('#menu a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',()=> document.getElementById('menu').classList.remove('open'));
+    // ======= MENU (a11y) =======
+    burger?.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-
-    initContractBindings();
-  </script>
-</body>
-</html>
+    document.querySelectorAll('#menu a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',()=>{
+        menu.classList.remove('open');
+        burger.setAttribute('aria-expanded','false');
+      });
+    });
+    document.addEventListener('click',(e)=>{
+      if(!document.querySelector('header').contains(e.target)){
+        menu.classList.remove('open'); burger.setAttribut
