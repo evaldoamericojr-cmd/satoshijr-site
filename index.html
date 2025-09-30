@@ -7,8 +7,7 @@
   <meta name="description" content="SatoshiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs." />
   <link rel="icon" type="image/png" href="satoshi.png" />
   <link rel="apple-touch-icon" href="satoshi.png" />
-
-  <!-- SEO/share (opcional, não muda layout) -->
+  <!-- SEO/share -->
   <link rel="canonical" href="https://satoshijr.xyz/">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:type" content="website">
@@ -62,7 +61,7 @@
     .btn-small{padding:6px 10px;border-radius:999px;border:1px solid var(--brand)}
     .btn-buy{border-color:var(--ok)} .btn-buy:hover{background:var(--ok);color:#051b10}
 
-    /* Sections / cards */
+    /* Sections */
     section{padding:40px 0}
     section[id]{scroll-margin-top:90px}
     h2{margin:0 0 16px;font-size:24px}
@@ -79,33 +78,39 @@
     .hero .sub{color:var(--muted);margin-top:8px;max-width:680px}
     .hero img{width:100%;max-width:440px;border-radius:16px;border:1px solid var(--stroke);background:#0b1224}
 
-    /* Quick facts & generic list */
+    /* Lists */
     .tok-list{display:grid;gap:10px}
     .tok-item{display:flex;align-items:center;gap:12px;background:#0d1731;border:1px solid var(--stroke);border-radius:12px;padding:12px 14px}
-    .tok-item>span:first-child{flex:0 0 180px}
+    .tok-item>span:first-child{flex:0 0 200px}
     .tok-item>span:last-child{flex:1;display:flex;align-items:center;gap:10px;justify-content:flex-end}
-    @media (max-width:540px){.tok-item>span:first-child{flex:0 0 140px}.tok-item>span:last-child{justify-content:flex-start;flex-wrap:wrap}}
+    @media (max-width:540px){.tok-item>span:first-child{flex:0 0 150px}.tok-item>span:last-child{justify-content:flex-start;flex-wrap:wrap}}
     .pill{background:var(--brand);color:#1a1305;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 
-    /* Slim progress (Tokenomics – lado esquerdo) */
+    /* Slim progress (left list) */
     .right-wrap{display:flex;align-items:center;gap:10px;min-width:200px;justify-content:flex-end}
     .bar{position:relative;flex:1;height:6px;background:#0a142a;border-radius:999px;border:1px solid var(--stroke);overflow:hidden;max-width:220px}
     .bar .fill{position:absolute;inset:0;width:0%;transition:width .6s ease}
     .tok-progress .pill{flex:0 0 auto}
-    @media(max-width:540px){.right-wrap{justify-content:flex-start;width:100%}.bar{max-width:100%}}
-    /* cores fixas p/ as barras */
-    .yellow .fill{background:#facc15}
+    /* colors (match donut) */
     .blue   .fill{background:#3b82f6}
+    .yellow .fill{background:#facc15}
     .red    .fill{background:#ef4444}
     .green  .fill{background:#22c55e}
     .purple .fill{background:#a855f7}
 
-    /* Donut 3D-like (lado direito) */
-    .donut-wrap{width:100%;max-width:420px;margin-inline:auto}
-    svg.donut{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 22px rgba(0,0,0,.35))}
-    .legend{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:10px}
-    .lg-item{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px}
-    .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
+    /* Donut 3D-like + animations */
+    .donut-wrap{ position:relative; width:100%; max-width:420px; margin-inline:auto }
+    svg.donut{ width:100%; height:auto; display:block; filter:drop-shadow(0 8px 22px rgba(0,0,0,.35)) }
+    .donut path.slice{ transition: transform .18s ease, opacity .18s ease; transform-box: fill-box; transform-origin: 160px 160px; }
+    .donut path.slice:hover{ opacity:.95 }
+    .donut-tooltip{
+      position:absolute; left:0; top:0; pointer-events:none;
+      background:#0d1731; border:1px solid var(--stroke); color:var(--txt);
+      padding:6px 8px; border-radius:8px; font-size:12px; line-height:1.2;
+      filter:drop-shadow(0 6px 16px rgba(0,0,0,.3));
+      opacity:0; transform:translate(-50%,-120%); transition:opacity .15s ease;
+      white-space:nowrap; z-index:2;
+    }
 
     /* Team */
     .team-wrap{display:flex;justify-content:center}
@@ -135,7 +140,12 @@
       </a>
       <button class="burger" aria-label="Open menu" aria-expanded="false">☰</button>
       <nav id="menu" class="menu">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#tokenomics">Tokenomics</a><a href="#howto">How to Buy</a><a href="#whitepaper">Whitepaper</a><a href="#team">Team</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#howto">How to Buy</a>
+        <a href="#whitepaper">Whitepaper</a>
+        <a href="#team">Team</a>
         <a href="https://x.com/satoshijrcoin" target="_blank" rel="noopener">X&nbsp;@satoshijrcoin</a>
       </nav>
     </div>
@@ -148,13 +158,16 @@
       <div class="contract-box">
         <span class="contract-label">Contract:</span>
         <a id="contractLink" class="contract-address" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
-          <span id="contractText">0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</span></a>
+          <span id="contractText">0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</span>
+        </a>
         <button class="btn-small" id="copyTop" type="button">Copy</button>
       </div>
-      <a class="btn-small btn-buy" id="buyBtn" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Buy</a>
+      <a class="btn-small btn-buy" id="buyBtn" target="_blank" rel="noopener"
+         href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Buy</a>
     </div>
   </div>
 
+  <!-- TOAST -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <main>
@@ -200,7 +213,8 @@
             <li class="tok-item">
               <span>Contract</span>
               <span>
-                <a id="contractLink2" class="contract-address" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
+                <a id="contractLink2" class="contract-address"
+                   href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
                   <span id="contractInline">0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</span>
                 </a>
                 <button class="btn-small" id="copyInline" type="button">Copy</button>
@@ -211,22 +225,22 @@
       </div>
     </section>
 
-    <!-- TOKENOMICS -->
+    <!-- TOKENOMICS (descending order + animated) -->
     <section id="tokenomics">
       <div class="container">
         <div class="card">
           <h2>Tokenomics</h2>
           <div class="grid grid-2" style="align-items:center">
-            <!-- Esquerda: lista com barras slim -->
+            <!-- Left: list with slim progress bars -->
             <div>
               <ul class="tok-list" style="list-style:none;padding:0;margin:0">
-                <li class="tok-item tok-progress yellow" data-pct="20">
-                  <span>Founder</span>
-                  <span class="right-wrap"><span class="bar"><span class="fill"></span></span><span class="pill">20% (4.2B)</span></span>
-                </li>
                 <li class="tok-item tok-progress blue" data-pct="40">
                   <span>Initial Liquidity</span>
                   <span class="right-wrap"><span class="bar"><span class="fill"></span></span><span class="pill">40% (8.4B)</span></span>
+                </li>
+                <li class="tok-item tok-progress yellow" data-pct="20">
+                  <span>Founder</span>
+                  <span class="right-wrap"><span class="bar"><span class="fill"></span></span><span class="pill">20% (4.2B)</span></span>
                 </li>
                 <li class="tok-item tok-progress red" data-pct="20">
                   <span>Marketing &amp; Community</span>
@@ -241,15 +255,12 @@
                   <span class="right-wrap"><span class="bar"><span class="fill"></span></span><span class="pill">10% (2.1B)</span></span>
                 </li>
               </ul>
-              <p class="muted" style="margin-top:12px">
-                Liquidity will be locked, wallets disclosed, and vesting applied where needed. Clear documentation builds trust.
-              </p>
             </div>
 
-            <!-- Direita: Donut 3D-like (SVG) -->
+            <!-- Right: donut 3D-like (SVG) -->
             <div class="donut-wrap">
               <svg id="donut" class="donut" viewBox="0 0 320 320" role="img" aria-label="Token distribution donut"></svg>
-              <div class="legend" id="legend"></div>
+              <div class="donut-tooltip"></div>
             </div>
           </div>
         </div>
@@ -271,7 +282,8 @@
             <div>
               <p class="muted">Tip: start with a small test swap to ensure the contract and liquidity are correct.</p>
               <div class="sp-16"></div>
-              <a class="btn" id="openDex" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Open PancakeSwap</a>
+              <a class="btn" id="openDex" target="_blank" rel="noopener"
+                 href="https://pancakeswap.finance/swap?outputCurrency=0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54">Open PancakeSwap</a>
             </div>
           </div>
         </div>
@@ -335,7 +347,6 @@
     const menu = document.getElementById('menu');
     const burger = document.querySelector('.burger');
 
-    // ======= INIT BINDS =======
     function initContractBindings(){
       contractTextTop.textContent = CONTRACT;
       contractLinkTop.href = BSCSCAN_URL;
@@ -345,8 +356,12 @@
       openDex.href = PANCAKE_URL;
     }
 
-    // ======= TOAST/COPY =======
-    function showToast(msg, ok=true){ toast.textContent = msg; toast.className = `toast show ${ok?'ok':'err'}`; setTimeout(()=>{ toast.className='toast'; }, 2200); }
+    function showToast(msg, ok=true){
+      toast.textContent = msg;
+      toast.className = `toast show ${ok ? 'ok':'err'}`;
+      setTimeout(()=>{ toast.className = 'toast'; }, 2200);
+    }
+
     async function copyContract(){
       try{
         if(navigator.clipboard?.writeText){ await navigator.clipboard.writeText(CONTRACT); }
@@ -355,7 +370,7 @@
       }catch(e){ showToast('Copy failed', false); }
     }
     copyTop.addEventListener('click', copyContract);
-    copyInline.addEventListener('click', copyContract);
+    copyInline?.addEventListener('click', copyContract);
 
     // ======= MENU =======
     burger.addEventListener('click', () => {
@@ -371,106 +386,113 @@
       }
     });
 
-    // ======= TOKENOMICS: preencher barras slim =======
-    document.querySelectorAll('.tok-progress').forEach(li=>{
+    /* ======= SLIM BARS: preenchimento com efeito cascata ======= */
+    document.querySelectorAll('.tok-progress').forEach((li, i)=>{
       const pct = Number(li.getAttribute('data-pct')||0);
-      li.querySelector('.fill').style.width = Math.min(Math.max(pct,0),100)+'%';
+      const fill = li.querySelector('.fill');
+      fill.style.width = '0%';
+      setTimeout(()=>{ fill.style.width = Math.min(Math.max(pct,0),100)+'%'; }, 120*i);
     });
 
-    // ======= DONUT 3D-like (SVG puro, sem CDN) =======
+    /* ======= DONUT 3D-like (SVG) com animação + hover pop-out + tooltip ======= */
     (function buildDonut(){
-      const labels = ['Founder','Initial Liquidity','Marketing & Community','Staking & Rewards','Strategic Reserve'];
-      const values = [20,40,20,10,10];
-      const colors = ['#facc15','#3b82f6','#ef4444','#22c55e','#a855f7']; // match left bars
+      // ordem decrescente (mesma da lista)
+      const labels = ['Initial Liquidity','Founder','Marketing & Community','Staking & Rewards','Strategic Reserve'];
+      const values = [40,20,20,10,10];
+      const colors = ['#3b82f6','#facc15','#ef4444','#22c55e','#a855f7'];
       const total = values.reduce((a,b)=>a+b,0);
 
       const svg = document.getElementById('donut');
-      const cx=160, cy=160, rOuter=120, rInner=76; // tamanhos
-      const gDefs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+      const wrap = svg.parentElement;
+      const tip = wrap.querySelector('.donut-tooltip');
+      const cx=160, cy=160, rOuter=120, rInner=76;
 
-      // Sombra suave para “efeito 3D”
-      const flt = document.createElementNS(svg.namespaceURI,'filter'); flt.setAttribute('id','ds');
-      const fe = document.createElementNS(svg.namespaceURI,'feDropShadow');
-      fe.setAttribute('dx','0'); fe.setAttribute('dy','2'); fe.setAttribute('stdDeviation','4'); fe.setAttribute('flood-opacity','0.35');
-      flt.appendChild(fe); gDefs.appendChild(flt);
-
-      // Gradiente highlight (top light -> bottom dark)
+      // defs (gradients)
+      const defs = document.createElementNS(svg.namespaceURI,'defs');
+      function shade(hex, p){
+        let c=hex.replace('#',''); if(c.length===3) c=c.split('').map(x=>x+x).join('');
+        const n=parseInt(c,16), R=(n>>16)&255, G=(n>>8)&255, B=n&255;
+        const mix = ch => Math.round(Math.min(255, Math.max(0, ch + 255*p)));
+        return '#'+((1<<24)+(mix(R)<<16)+(mix(G)<<8)+mix(B)).toString(16).slice(1);
+      }
       function mkGrad(id, base){
-        const grad = document.createElementNS(svg.namespaceURI,'linearGradient');
-        grad.setAttribute('id',id); grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
-        const stop1 = document.createElementNS(svg.namespaceURI,'stop'); stop1.setAttribute('offset','0%'); stop1.setAttribute('stop-color',shade(base,0.14));
-        const stop2 = document.createElementNS(svg.namespaceURI,'stop'); stop2.setAttribute('offset','50%'); stop2.setAttribute('stop-color',base);
-        const stop3 = document.createElementNS(svg.namespaceURI,'stop'); stop3.setAttribute('offset','100%'); stop3.setAttribute('stop-color',shade(base,-0.20));
-        grad.appendChild(stop1); grad.appendChild(stop2); grad.appendChild(stop3); gDefs.appendChild(grad);
+        const lg=document.createElementNS(svg.namespaceURI,'linearGradient');
+        lg.setAttribute('id',id); lg.setAttribute('x1','0'); lg.setAttribute('y1','0'); lg.setAttribute('x2','0'); lg.setAttribute('y2','1');
+        const s1=document.createElementNS(svg.namespaceURI,'stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color',shade(base,0.18));
+        const s2=document.createElementNS(svg.namespaceURI,'stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color',shade(base,-0.20));
+        lg.append(s1,s2); defs.appendChild(lg);
       }
-      function shade(hex, p){ // p: +0.2 lighten, -0.2 darken
-        let c = hex.replace('#',''); if(c.length===3) c = c.split('').map(x=>x+x).join('');
-        const num = parseInt(c,16); let r=(num>>16)&255, g=(num>>8)&255, b=num&255;
-        r = Math.round(Math.min(255,Math.max(0, r + 255*p))); g = Math.round(Math.min(255,Math.max(0, g + 255*p))); b = Math.round(Math.min(255,Math.max(0, b + 255*p)));
-        return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
-      }
-
       colors.forEach((c,i)=>mkGrad('grad'+i,c));
-      svg.appendChild(gDefs);
+      svg.appendChild(defs);
 
-      // Funções util
-      function polar(cx,cy,r,ang){ const rad=(ang-90)*Math.PI/180; return {x:cx + r*Math.cos(rad), y:cy + r*Math.sin(rad)}; }
-      function arcPath(cx,cy,rOut,rIn,a0,a1){
-        const p0 = polar(cx,cy,rOut,a0), p1 = polar(cx,cy,rOut,a1);
-        const p2 = polar(cx,cy,rIn ,a1), p3 = polar(cx,cy,rIn ,a0);
-        const large = (a1 - a0) > 180 ? 1 : 0;
-        return [
-          `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)}`,
-          `A ${rOut} ${rOut} 0 ${large} 1 ${p1.x.toFixed(2)} ${p1.y.toFixed(2)}`,
-          `L ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`,
-          `A ${rIn} ${rIn} 0 ${large} 0 ${p3.x.toFixed(2)} ${p3.y.toFixed(2)}`,
-          'Z'
-        ].join(' ');
-      }
+      // helpers
+      const polar=(cx,cy,r,a)=>{ const t=(a-90)*Math.PI/180; return {x:cx+r*Math.cos(t), y:cy+r*Math.sin(t)}; };
+      const arcD=(cx,cy,ro,ri,a0,a1)=>{
+        const p0=polar(cx,cy,ro,a0), p1=polar(cx,cy,ro,a1);
+        const p2=polar(cx,cy,ri,a1), p3=polar(cx,cy,ri,a0);
+        const large=(a1-a0)>180?1:0;
+        return `M${p0.x},${p0.y}A${ro},${ro} 0 ${large} 1 ${p1.x},${p1.y}L${p2.x},${p2.y}A${ri},${ri} 0 ${large} 0 ${p3.x},${p3.y}Z`;
+      };
 
-      let start=-90; // começa em cima
+      let start=-90;
+      const maxVal=Math.max(...values);
+
       values.forEach((v,i)=>{
-        const ang = 360 * (v/total);
-        const end = start + ang;
-
-        // “explode” leve no maior setor (Initial Liquidity)
-        const pull = (v === Math.max(...values)) ? 6 : 0;
-        const mid = (start+end)/2;
-        const dx = pull * Math.cos((mid-90)*Math.PI/180);
-        const dy = pull * Math.sin((mid-90)*Math.PI/180);
+        const end = start + 360*(v/total);
+        const mid = (start + end) / 2;
+        const pull = (v===maxVal) ? 6 : 4;
 
         const path = document.createElementNS(svg.namespaceURI,'path');
-        path.setAttribute('d', arcPath(cx+dx,cy+dy,rOuter,rInner,start,end));
-        path.setAttribute('fill', `url(#grad${i})`);
+        path.setAttribute('class','slice');
+        path.setAttribute('fill',`url(#grad${i})`);
         path.setAttribute('stroke','rgba(0,0,0,0.35)');
         path.setAttribute('stroke-width','1');
-        path.setAttribute('filter','url(#ds)');
+
+        // sweep animation (~1s)
+        let cur = start, step = (end-start)/60;
+        function animate(){
+          cur += step;
+          if(cur>end) cur=end;
+          path.setAttribute('d', arcD(cx,cy,rOuter,rInner,start,cur));
+          if(cur<end) requestAnimationFrame(animate);
+        }
+        animate();
         svg.appendChild(path);
+
+        // hover pop-out + tooltip
+        const rad = (mid-90)*Math.PI/180;
+        const dx = pull * Math.cos(rad), dy = pull * Math.sin(rad);
+        path.addEventListener('mouseenter', ()=>{
+          path.style.transform = `translate(${dx}px, ${dy}px)`;
+          tip.innerHTML = `<strong>${labels[i]}</strong> — ${v}%`;
+          tip.style.opacity = '1';
+        });
+        path.addEventListener('mousemove', (e)=>{
+          const box = wrap.getBoundingClientRect();
+          tip.style.left = (e.clientX - box.left) + 'px';
+          tip.style.top  = (e.clientY - box.top)  + 'px';
+        });
+        path.addEventListener('mouseleave', ()=>{
+          path.style.transform = 'translate(0,0)';
+          tip.style.opacity = '0';
+        });
 
         start = end;
       });
 
-      // furo central + label
-      const hole = document.createElementNS(svg.namespaceURI,'circle');
+      // center
+      const hole=document.createElementNS(svg.namespaceURI,'circle');
       hole.setAttribute('cx',cx); hole.setAttribute('cy',cy); hole.setAttribute('r',rInner-2);
       hole.setAttribute('fill','#0b1224'); hole.setAttribute('stroke','var(--stroke)'); hole.setAttribute('stroke-width','1');
       svg.appendChild(hole);
 
-      const t = document.createElementNS(svg.namespaceURI,'text');
-      t.setAttribute('x',cx); t.setAttribute('y',cy+4); t.setAttribute('text-anchor','middle'); t.setAttribute('font-size','18'); t.setAttribute('font-weight','800'); t.setAttribute('fill','#e5e7eb');
-      t.textContent = 'SATJR'; svg.appendChild(t);
-
-      // legenda
-      const legend = document.getElementById('legend');
-      labels.forEach((lab,i)=>{
-        const item = document.createElement('div'); item.className='lg-item';
-        const dot = document.createElement('span'); dot.className='dot'; dot.style.background=colors[i];
-        const txt = document.createElement('span'); txt.textContent = `${lab} — ${values[i]}%`;
-        item.appendChild(dot); item.appendChild(txt); legend.appendChild(item);
-      });
+      const t=document.createElementNS(svg.namespaceURI,'text');
+      t.setAttribute('x',cx); t.setAttribute('y',cy+5); t.setAttribute('text-anchor','middle');
+      t.setAttribute('font-size','18'); t.setAttribute('font-weight','800'); t.setAttribute('fill','#e5e7eb');
+      t.textContent='SATJR'; svg.appendChild(t);
     })();
 
-    // Start
+    // start
     initContractBindings();
   </script>
 </body>
