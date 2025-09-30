@@ -4,16 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SatoshiJr — The meme heir</title>
-  <meta name="description" content="SatoshiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs." />
+  <meta name="description" content="SatoshiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, the meme heir, and clear docs." />
   <link rel="icon" type="image/png" href="satoshi.png" />
   <link rel="apple-touch-icon" href="satoshi.png" />
-
   <!-- SEO/share -->
   <link rel="canonical" href="https://satoshijr.xyz/">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:type" content="website">
   <meta property="og:title" content="SatoshiJr — The meme heir">
-  <meta property="og:description" content="Community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs.">
+  <meta property="og:description" content="Community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, the meme heir, and clear docs.">
   <meta property="og:url" content="https://satoshijr.xyz/">
   <meta property="og:image" content="https://satoshijr.xyz/satoshi.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +24,6 @@
       --bg:#0f172a; --panel:#0b1224; --txt:#ffffff; --muted:#9ca3af;
       --brand:#f59e0b; --stroke:rgba(255,255,255,0.08);
       --ok:#16a34a;
-
       /* cores do gráfico/barras */
       --blue:#3b82f6; --yellow:#facc15; --red:#ef4444; --green:#22c55e; --purple:#a855f7;
     }
@@ -75,7 +73,7 @@
 
     /* Sections */
     section{padding:40px 0} section[id]{scroll-margin-top:90px}
-    h2{margin:0 0 16px;font-size:24px;color:var(--brand)} /* títulos padronizados */
+    h2{margin:0 0 16px;font-size:24px;color:var(--brand)}
     .card{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;padding:20px}
     .grid{display:grid;gap:16px}
     @media (min-width:860px){.grid-2{grid-template-columns:1fr 1fr}}
@@ -109,17 +107,15 @@
     .blue .fill{background:var(--blue)} .yellow .fill{background:var(--yellow)} .red .fill{background:var(--red)}
     .green .fill{background:var(--green)} .purple .fill{background:var(--purple)}
 
-    /* Donut — estilo do print (arcos reais, gaps, terminais arredondados, anel interno escuro) */
+    /* Donut */
     .donut-wrap{position:relative;width:100%;max-width:520px;margin-inline:auto}
     svg.donut{width:100%;height:auto;display:block}
     .donut .slice{
-      fill:none;
-      stroke-linecap:round;
-      stroke-width:44; /* espessura do anel (ajuste se quiser) */
+      fill:none; stroke-linecap:round; stroke-width:44;
       filter:drop-shadow(0 6px 18px rgba(0,0,0,.35));
     }
     .donut .inner-ring{
-      fill:#0b1224; stroke:#0a1022; stroke-width:6; /* borda do “miolo” para dar o relevo */
+      fill:#0b1224; stroke:#0a1022; stroke-width:6;
       filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));
     }
     .donut .label{font-size:28px;font-weight:900;fill:#e5e7eb;letter-spacing:.6px}
@@ -154,7 +150,7 @@
   <header>
     <div class="container nav">
       <a class="brand-link" href="#home" aria-label="Go to Home">
-        <img src="satoshi.png" alt="SatoshiJr logo" width="34" height="34" loading="eager" decoding="async"/>
+        <img src="satoshi.png" alt="SatoshiJr — the meme heir" width="34" height="34" loading="eager" decoding="async"/>
         <span class="brand-txt">
           <span class="brand-name">SatoshiJr</span>
           <span class="brand-tag">The meme heir</span>
@@ -198,7 +194,7 @@
       <div class="container hero-grid">
         <div>
           <h1>SatoshiJr — The meme heir</h1>
-          <p>A playful, community-driven memecoin on BNB Chain with simple, transparent tokenomics and a friendly mascot.</p>
+          <p>A playful, community-driven memecoin on BNB Chain with simple, transparent tokenomics and the meme heir.</p>
           <p class="sub">No promises, no complicated mechanics — just memes, transparency, and an open community spirit.</p>
           <div class="sp-16"></div>
           <div class="row">
@@ -208,9 +204,9 @@
           </div>
         </div>
         <div class="center">
-          <img src="satoshi.png" alt="SatoshiJr mascot" width="440" height="440" loading="eager" decoding="async" />
+          <img src="satoshi.png" alt="SatoshiJr — the meme heir" width="440" height="440" loading="eager" decoding="async" />
           <div class="sp-8"></div>
-          <small class="muted">Your friendly meme mascot — independent and community-led.</small>
+          <small class="muted">The meme heir — independent and community-led.</small>
         </div>
       </div>
     </section>
@@ -423,45 +419,35 @@
       requestAnimationFrame(()=>{ setTimeout(()=>{ fill.style.width = Math.min(Math.max(pct,0),100)+'%'; }, 120*i); });
     });
 
-    // ======= DONUT (arcos reais + gaps + anel interno) =======
+    // ======= DONUT =======
     (function buildDonut(){
       const svg = document.getElementById('donut');
       while (svg.firstChild) svg.removeChild(svg.firstChild);
       const tip = svg.parentElement.querySelector('.donut-tooltip');
 
-      // geometria
       const cx=160, cy=160;
-      const ringWidth = 44;       // deve acompanhar .slice stroke-width
-      const R = 110;              // raio do “traço”
-      const innerR = R - ringWidth/2 - 3; // raio do círculo interno
-      const startDeg = -90;       // inicia às 12h
-      const gapDeg   = 8;         // gap do print (pode ajustar 6–10)
+      const ringWidth = 44;
+      const R = 110;
+      const innerR = R - ringWidth/2 - 3;
+      const startDeg = -90;
+      const gapDeg   = 8;
 
-      // anel interno (miolo escuro com leve borda)
       svg.appendChild(el('circle',{cx,cy,r:innerR,class:'inner-ring'}));
-
-      // label central
-      const label = el('text',{x:cx,y:cy+8,'text-anchor':'middle',class:'label'});
-      label.textContent = 'SATJR'; svg.appendChild(label);
+      const label = el('text',{x:cx,y:cy+8,'text-anchor':'middle',class:'label'}); label.textContent = 'SATJR'; svg.appendChild(label);
 
       const total = TOKE_DATA.reduce((s,d)=>s+d.value,0) || 1;
-
       let a = startDeg;
       TOKE_DATA.forEach((d)=>{
-        // ângulo da fatia menos gap para ficar com “respiro” entre segmentos
         const sweep = (d.value/total)*360 - gapDeg;
         const a0=a + gapDeg/2;
         const a1=a0 + Math.max(0, sweep);
 
-        // path do arco
         const p = el('path',{ d: arcPath(cx,cy,R,a0,a1), class:'slice', stroke:d.color });
-        // anima por comprimento
         const len = arcLen(R,a0,a1);
         p.setAttribute('pathLength', len);
         p.setAttribute('stroke-dasharray', `0 ${len}`);
         svg.appendChild(p);
 
-        // animação suave
         let t0 = performance.now();
         (function anim(ts){
           const z = Math.min(1,(ts - t0)/700);
@@ -470,7 +456,6 @@
           if(z<1) requestAnimationFrame(anim);
         })(t0);
 
-        // tooltip
         p.addEventListener('mouseenter', ()=>{ tip.textContent = `${d.label} — ${d.value}%`; tip.style.display='block'; tip.style.opacity='1'; });
         p.addEventListener('mousemove', (e)=>{ const b=svg.getBoundingClientRect(); tip.style.left=(e.clientX-b.left)+'px'; tip.style.top=(e.clientY-b.top)+'px'; });
         p.addEventListener('mouseleave', ()=>{ tip.style.opacity='0'; tip.style.display='none'; });
