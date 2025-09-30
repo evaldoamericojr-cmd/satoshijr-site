@@ -3,20 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SatohiJr — The meme heir</title>
-  <meta name="description" content="SatohiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs." />
+  <title>SatoshiJr — The meme heir</title>
+  <meta name="description" content="SatoshiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs." />
   <link rel="icon" type="image/png" href="satoshi.png" />
   <link rel="apple-touch-icon" href="satoshi.png" />
   <style>
     :root{
-      --bg:#0f172a;
-      --panel:#0b1224;
-      --txt:#e5e7eb;
-      --muted:#9ca3af;
-      --brand:#f59e0b;
-      --stroke:rgba(255,255,255,0.08);
-      --ok:#16a34a;
-      --danger:#ef4444;
+      --bg:#0f172a; --panel:#0b1224; --txt:#e5e7eb; --muted:#9ca3af;
+      --brand:#f59e0b; --stroke:rgba(255,255,255,0.08); --ok:#16a34a; --danger:#ef4444;
     }
     *{box-sizing:border-box}
     html,body{
@@ -88,9 +82,10 @@
 
     /* Sections */
     section{padding:40px 0}
+    /* Evita que o título fique escondido sob o header ao clicar nas âncoras */
+    section[id]{scroll-margin-top:90px}
     h2{margin:0 0 16px;font-size:24px}
     .title-brand{color:var(--brand);text-align:center;margin-bottom:16px}
-
     .card{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;padding:20px}
     .grid{display:grid;gap:16px}
     @media (min-width:860px){.grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:repeat(3,1fr)}}
@@ -116,7 +111,7 @@
     .step{display:flex;gap:12px;align-items:flex-start}
     .step-num{min-width:28px;height:28px;border-radius:999px;background:var(--brand);color:#1a1305;font-weight:900;display:flex;align-items:center;justify-content:center}
 
-    /* Team card (como no print) */
+    /* Team card */
     .team-wrap{display:flex;justify-content:center}
     .team-card{
       max-width:760px;width:100%;
@@ -147,17 +142,16 @@
     <div class="container nav">
       <!-- Ícone/brand é o BOTÃO HOME -->
       <a class="brand-link" href="#home" aria-label="Go to Home">
-        <img src="satoshi.png" alt="SatohiJr logo" />
+        <img src="satoshi.png" alt="SatoshiJr logo" />
         <span class="brand-txt">
-          <span class="brand-name">SatohiJr</span>
+          <span class="brand-name">SatoshiJr</span>
           <span class="brand-tag">The meme heir</span>
         </span>
       </a>
-
       <button class="burger" aria-label="Open menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
-
       <nav id="menu" class="menu">
-        <!-- Sem botão Home -->
+        <!-- NOVO botão Home -->
+        <a href="#home" aria-label="Go to Home">Home</a>
         <a href="#about">About</a>
         <a href="#tokenomics">Tokenomics</a>
         <a href="#howto">How to Buy</a>
@@ -187,11 +181,11 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <main>
-    <!-- HOME / HERO com mascote -->
+    <!-- HOME / HERO -->
     <section id="home" class="hero">
       <div class="container hero-grid">
         <div>
-          <h1>SatohiJr — The meme heir</h1>
+          <h1>SatoshiJr — The meme heir</h1>
           <p>A playful, community-driven memecoin on BNB Chain with simple, transparent tokenomics and a friendly mascot.</p>
           <p class="sub">No promises, no complicated mechanics — just memes, transparency, and an open community spirit.</p>
           <div class="sp-16"></div>
@@ -202,8 +196,7 @@
           </div>
         </div>
         <div class="center">
-          <!-- Mascote preservado -->
-          <img src="satoshi.png" alt="SatohiJr mascot" />
+          <img src="satoshi.png" alt="SatoshiJr mascot" />
           <div class="sp-8"></div>
           <small class="muted">Your friendly meme mascot — independent and community-led.</small>
         </div>
@@ -214,10 +207,10 @@
     <section id="about">
       <div class="container grid grid-2">
         <div class="card">
-          <h2>About SatohiJr</h2>
-          <p><strong>SatohiJr (SATJR)</strong> is a community-first meme token on the BNB Chain (BEP-20). It was created for fun and culture-building, prioritizing transparency and simplicity over complex token mechanics.</p>
+          <h2>About SatoshiJr</h2>
+          <p><strong>SatoshiJr (SATJR)</strong> is a community-first meme token on the BNB Chain (BEP-20). It was created for fun and culture-building, prioritizing transparency and simplicity over complex token mechanics.</p>
           <p>There are no guarantees or expectations of profit. The goal is to foster a positive meme culture, make everything clear and public (distribution, treasury, liquidity), and let utilities and initiatives evolve with community input.</p>
-          <p class="muted">SatohiJr is an independent project not affiliated with any other cryptocurrencies, brands, or trademarks.</p>
+          <p class="muted">SatoshiJr is an independent project not affiliated with any other cryptocurrencies, brands, or trademarks.</p>
         </div>
         <div class="card">
           <h2>Quick facts</h2>
@@ -302,7 +295,7 @@
       </div>
     </section>
 
-    <!-- TEAM (card único centralizado como no print) -->
+    <!-- TEAM -->
     <section id="team">
       <div class="container">
         <h2 class="title-brand">Team</h2>
@@ -327,7 +320,7 @@
     </section>
   </main>
 
-  <!-- FOOTER com disclaimer exigido -->
+  <!-- FOOTER -->
   <footer>
     <div class="container row" style="align-items:flex-start;gap:12px">
       <span>© 2025 SatoshiJr — The Meme Heir of Bitcoin • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.</span>
@@ -347,7 +340,6 @@
     const contractLinkTop = document.getElementById('contractLink');
     const copyTop = document.getElementById('copyTop');
     const buyBtn = document.getElementById('buyBtn');
-
     const contractInline = document.getElementById('contractInline');
     const contractLink2 = document.getElementById('contractLink2');
     const copyInline = document.getElementById('copyInline');
@@ -358,7 +350,6 @@
       if(contractTextTop) contractTextTop.textContent = CONTRACT;
       if(contractLinkTop){ contractLinkTop.href = BSCSCAN_URL; }
       if(buyBtn){ buyBtn.href = PANCAKE_URL; }
-
       if(contractInline) contractInline.textContent = CONTRACT;
       if(contractLink2){ contractLink2.href = BSCSCAN_URL; }
       if(openDex){ openDex.href = PANCAKE_URL; }
