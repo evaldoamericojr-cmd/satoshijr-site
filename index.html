@@ -7,6 +7,7 @@
   <meta name="description" content="SatoshiJr (SATJR) — community-first memecoin on BNB Chain. Transparent tokenomics, fun culture, friendly mascot, and clear docs." />
   <link rel="icon" type="image/png" href="satoshi.png" />
   <link rel="apple-touch-icon" href="satoshi.png" />
+
   <!-- SEO/share -->
   <link rel="canonical" href="https://satoshijr.xyz/">
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -22,18 +23,14 @@
   <style>
     :root{
       --bg:#0f172a; --panel:#0b1224; --txt:#e5e7eb; --muted:#9ca3af;
-      --brand:#f59e0b; --stroke:rgba(255,255,255,0.08); --ok:#16a34a;
+      --brand:#f59e0b; --stroke:rgba(255,255,255,0.08); --ok:#16a34a; --danger:#ef4444;
     }
     *{box-sizing:border-box}
     html,body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Ubuntu,Arial,sans-serif;
-      color:var(--txt);
-      background:linear-gradient(180deg,var(--bg),#0b1022 60%, #090e1c 100%);
-      scroll-behavior:smooth;
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Ubuntu,Arial,sans-serif;
+      color:var(--txt); background:linear-gradient(180deg,var(--bg),#0b1022 60%, #090e1c 100%); scroll-behavior:smooth;
     }
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
     a:focus-visible,.btn:focus-visible,.btn-small:focus-visible,.burger:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
@@ -43,10 +40,10 @@
     .brand-link{display:flex;align-items:center;gap:12px}
     .brand-link img{width:34px;height:34px;border-radius:8px}
     .brand-txt{display:flex;flex-direction:column}
-    .brand-name{font-weight:900;letter-spacing:.2px;color:var(--txt)}
+    .brand-name{font-weight:900;letter-spacing:.2px}
     .brand-tag{font-size:12px;color:var(--muted);margin-top:2px}
     .menu{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .menu a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;font-weight:700;border:1px solid var(--brand);background:transparent;color:var(--txt);transition:all .2s ease}
+    .menu a,.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;font-weight:700;border:1px solid var(--brand);background:transparent;color:var(--txt);transition:.2s}
     .menu a:hover,.btn:hover{background:var(--brand);color:#1a1305;text-decoration:none}
     .burger{display:none;border:1px solid var(--brand);border-radius:10px;padding:8px 10px;background:transparent;color:var(--txt)}
     @media (max-width:860px){.menu{display:none}.menu.open{display:flex;flex-direction:column;align-items:flex-start;padding:12px 0}.burger{display:inline-flex}}
@@ -61,9 +58,16 @@
     .btn-small{padding:6px 10px;border-radius:999px;border:1px solid var(--brand)}
     .btn-buy{border-color:var(--ok)} .btn-buy:hover{background:var(--ok);color:#051b10}
 
+    /* Toast */
+    .toast{
+      position:fixed;right:16px;bottom:16px;z-index:80;background:#0d1731;border:1px solid var(--stroke);color:var(--txt);
+      padding:12px 14px;border-radius:12px;opacity:0;transform:translateY(10px);transition:all .2s ease;pointer-events:none;
+    }
+    .toast.show{opacity:1;transform:translateY(0)}
+    .toast.ok{border-color:rgba(22,163,74,.5)} .toast.err{border-color:rgba(239,68,68,.5)}
+
     /* Sections */
-    section{padding:40px 0}
-    section[id]{scroll-margin-top:90px}
+    section{padding:40px 0} section[id]{scroll-margin-top:90px}
     h2{margin:0 0 16px;font-size:24px}
     .title-brand{color:var(--brand);text-align:center;margin-bottom:16px}
     .card{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;padding:20px}
@@ -86,44 +90,34 @@
     @media (max-width:540px){.tok-item>span:first-child{flex:0 0 150px}.tok-item>span:last-child{justify-content:flex-start;flex-wrap:wrap}}
     .pill{background:var(--brand);color:#1a1305;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 
-    /* Slim progress (left list) */
+    /* Slim progress */
     .right-wrap{display:flex;align-items:center;gap:10px;min-width:200px;justify-content:flex-end}
     .bar{position:relative;flex:1;height:6px;background:#0a142a;border-radius:999px;border:1px solid var(--stroke);overflow:hidden;max-width:220px}
     .bar .fill{position:absolute;inset:0;width:0%;transition:width .6s ease}
-    .tok-progress .pill{flex:0 0 auto}
-    /* colors (match donut) */
-    .blue   .fill{background:#3b82f6}
-    .yellow .fill{background:#facc15}
-    .red    .fill{background:#ef4444}
-    .green  .fill{background:#22c55e}
-    .purple .fill{background:#a855f7}
+    .blue .fill{background:#3b82f6} .yellow .fill{background:#facc15} .red .fill{background:#ef4444}
+    .green .fill{background:#22c55e} .purple .fill{background:#a855f7}
 
-    /* Donut 3D-like + animations */
-    .donut-wrap{ position:relative; width:100%; max-width:420px; margin-inline:auto }
-    svg.donut{ width:100%; height:auto; display:block; filter:drop-shadow(0 8px 22px rgba(0,0,0,.35)) }
-    .donut path.slice{ transition: transform .18s ease, opacity .18s ease; transform-box: fill-box; transform-origin: 160px 160px; }
-    .donut path.slice:hover{ opacity:.95 }
+    /* Donut clean (stroke arcs) */
+    .donut-wrap{ position:relative; width:100%; max-width:460px; margin-inline:auto }
+    svg.donut{ width:100%; height:auto; display:block }
+    .donut .ring-bg{ fill:none; stroke:#0b1224; stroke-width:42; opacity:.9; filter:drop-shadow(0 6px 18px rgba(0,0,0,.35)) }
+    .donut .slice{ fill:none; stroke-width:42; stroke-linecap:round; transition: stroke-width .15s ease, opacity .15s ease }
+    .donut .slice:hover{ opacity:.95; stroke-width:44 }
     .donut-tooltip{
-      position:absolute; left:0; top:0; pointer-events:none;
-      background:#0d1731; border:1px solid var(--stroke); color:var(--txt);
-      padding:6px 8px; border-radius:8px; font-size:12px; line-height:1.2;
-      filter:drop-shadow(0 6px 16px rgba(0,0,0,.3));
-      opacity:0; transform:translate(-50%,-120%); transition:opacity .15s ease;
-      white-space:nowrap; z-index:2;
+      position:absolute; left:0; top:0; pointer-events:none; background:#0d1731; border:1px solid var(--stroke); color:var(--txt);
+      padding:6px 8px; border-radius:8px; font-size:12px; line-height:1.2; filter:drop-shadow(0 6px 16px rgba(0,0,0,.3));
+      opacity:0; transform:translate(-50%,-120%); transition:opacity .12s ease; white-space:nowrap; z-index:2;
     }
 
-    /* Team */
+    /* Team & footer */
     .team-wrap{display:flex;justify-content:center}
     .team-card{max-width:760px;width:100%;background:#0c152a;border:1px solid var(--stroke);border-radius:18px;padding:24px;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.25)}
     .team-name{font-weight:900;font-size:20px;margin:6px 0 10px}
     .team-desc{color:var(--txt);margin:0 auto 8px;max-width:680px}
-    .team-contact{margin:10px 0 14px}
     .team-links a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--brand);padding:8px 12px;border-radius:999px;font-weight:700}
-
     footer{border-top:1px solid var(--stroke);padding:28px 0 60px;color:var(--muted)}
     .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .right{margin-left:auto}
-    .center{text-align:center}
     .sp-8{height:8px}.sp-16{height:16px}
   </style>
 </head>
@@ -202,7 +196,6 @@
           <p>There are no guarantees or expectations of profit. The goal is to foster a positive meme culture, make everything clear and public (distribution, treasury, liquidity), and let utilities and initiatives evolve with community input.</p>
           <p class="muted">SatoshiJr is an independent project not affiliated with any other cryptocurrencies, brands, or trademarks.</p>
         </div>
-
         <div class="card">
           <h2>Quick facts</h2>
           <ul class="tok-list" style="list-style:none;padding:0;margin:0">
@@ -213,8 +206,7 @@
             <li class="tok-item">
               <span>Contract</span>
               <span>
-                <a id="contractLink2" class="contract-address"
-                   href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
+                <a id="contractLink2" class="contract-address" href="https://bscscan.com/token/0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54" target="_blank" rel="noopener">
                   <span id="contractInline">0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54</span>
                 </a>
                 <button class="btn-small" id="copyInline" type="button">Copy</button>
@@ -225,13 +217,13 @@
       </div>
     </section>
 
-    <!-- TOKENOMICS (descending order + animated) -->
+    <!-- TOKENOMICS -->
     <section id="tokenomics">
       <div class="container">
         <div class="card">
           <h2>Tokenomics</h2>
           <div class="grid grid-2" style="align-items:center">
-            <!-- Left: list with slim progress bars -->
+            <!-- Left: list -->
             <div>
               <ul class="tok-list" style="list-style:none;padding:0;margin:0">
                 <li class="tok-item tok-progress blue" data-pct="40">
@@ -257,9 +249,9 @@
               </ul>
             </div>
 
-            <!-- Right: donut 3D-like (SVG) -->
+            <!-- Right: donut clean -->
             <div class="donut-wrap">
-              <svg id="donut" class="donut" viewBox="0 0 320 320" role="img" aria-label="Token distribution donut"></svg>
+              <svg id="donut" class="donut" viewBox="0 0 320 320" role="img" aria-label="Token distribution"></svg>
               <div class="donut-tooltip"></div>
             </div>
           </div>
@@ -347,6 +339,7 @@
     const menu = document.getElementById('menu');
     const burger = document.querySelector('.burger');
 
+    // ======= INIT BINDS =======
     function initContractBindings(){
       contractTextTop.textContent = CONTRACT;
       contractLinkTop.href = BSCSCAN_URL;
@@ -356,12 +349,8 @@
       openDex.href = PANCAKE_URL;
     }
 
-    function showToast(msg, ok=true){
-      toast.textContent = msg;
-      toast.className = `toast show ${ok ? 'ok':'err'}`;
-      setTimeout(()=>{ toast.className = 'toast'; }, 2200);
-    }
-
+    // ======= TOAST/COPY =======
+    function showToast(msg, ok=true){ toast.textContent = msg; toast.className = `toast show ${ok?'ok':'err'}`; setTimeout(()=>{ toast.className='toast'; }, 2200); }
     async function copyContract(){
       try{
         if(navigator.clipboard?.writeText){ await navigator.clipboard.writeText(CONTRACT); }
@@ -386,7 +375,7 @@
       }
     });
 
-    /* ======= SLIM BARS: preenchimento com efeito cascata ======= */
+    // ======= SLIM BARS: cascade fill =======
     document.querySelectorAll('.tok-progress').forEach((li, i)=>{
       const pct = Number(li.getAttribute('data-pct')||0);
       const fill = li.querySelector('.fill');
@@ -394,9 +383,8 @@
       setTimeout(()=>{ fill.style.width = Math.min(Math.max(pct,0),100)+'%'; }, 120*i);
     });
 
-    /* ======= DONUT 3D-like (SVG) com animação + hover pop-out + tooltip ======= */
+    // ======= DONUT CLEAN (stroke arcs with gaps + radial animation) =======
     (function buildDonut(){
-      // ordem decrescente (mesma da lista)
       const labels = ['Initial Liquidity','Founder','Marketing & Community','Staking & Rewards','Strategic Reserve'];
       const values = [40,20,20,10,10];
       const colors = ['#3b82f6','#facc15','#ef4444','#22c55e','#a855f7'];
@@ -404,95 +392,73 @@
 
       const svg = document.getElementById('donut');
       const wrap = svg.parentElement;
+      while(svg.firstChild) svg.removeChild(svg.firstChild);
+
       const tip = wrap.querySelector('.donut-tooltip');
-      const cx=160, cy=160, rOuter=120, rInner=76;
 
-      // defs (gradients)
-      const defs = document.createElementNS(svg.namespaceURI,'defs');
-      function shade(hex, p){
-        let c=hex.replace('#',''); if(c.length===3) c=c.split('').map(x=>x+x).join('');
-        const n=parseInt(c,16), R=(n>>16)&255, G=(n>>8)&255, B=n&255;
-        const mix = ch => Math.round(Math.min(255, Math.max(0, ch + 255*p)));
-        return '#'+((1<<24)+(mix(R)<<16)+(mix(G)<<8)+mix(B)).toString(16).slice(1);
+      // geometry
+      const cx=160, cy=160, R=110, C=2*Math.PI*R, gapDeg=2, gapLen=C*(gapDeg/360);
+
+      // background ring
+      const bg = document.createElementNS(svg.namespaceURI,'circle');
+      bg.setAttribute('class','ring-bg'); bg.setAttribute('cx',cx); bg.setAttribute('cy',cy); bg.setAttribute('r',R);
+      svg.appendChild(bg);
+
+      // group rotated to start at top
+      const g = document.createElementNS(svg.namespaceURI,'g');
+      g.setAttribute('transform',`rotate(-90,${cx},${cy})`);
+      svg.appendChild(g);
+
+      function makeSlice(color){
+        const c = document.createElementNS(svg.namespaceURI,'circle');
+        c.setAttribute('class','slice');
+        c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',R);
+        c.setAttribute('stroke',color);
+        c.setAttribute('stroke-dasharray',`0 ${C}`); // animate from 0
+        return c;
       }
-      function mkGrad(id, base){
-        const lg=document.createElementNS(svg.namespaceURI,'linearGradient');
-        lg.setAttribute('id',id); lg.setAttribute('x1','0'); lg.setAttribute('y1','0'); lg.setAttribute('x2','0'); lg.setAttribute('y2','1');
-        const s1=document.createElementNS(svg.namespaceURI,'stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color',shade(base,0.18));
-        const s2=document.createElementNS(svg.namespaceURI,'stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color',shade(base,-0.20));
-        lg.append(s1,s2); defs.appendChild(lg);
-      }
-      colors.forEach((c,i)=>mkGrad('grad'+i,c));
-      svg.appendChild(defs);
 
-      // helpers
-      const polar=(cx,cy,r,a)=>{ const t=(a-90)*Math.PI/180; return {x:cx+r*Math.cos(t), y:cy+r*Math.sin(t)}; };
-      const arcD=(cx,cy,ro,ri,a0,a1)=>{
-        const p0=polar(cx,cy,ro,a0), p1=polar(cx,cy,ro,a1);
-        const p2=polar(cx,cy,ri,a1), p3=polar(cx,cy,ri,a0);
-        const large=(a1-a0)>180?1:0;
-        return `M${p0.x},${p0.y}A${ro},${ro} 0 ${large} 1 ${p1.x},${p1.y}L${p2.x},${p2.y}A${ri},${ri} 0 ${large} 0 ${p3.x},${p3.y}Z`;
-      };
+      // center disk + text
+      const center = document.createElementNS(svg.namespaceURI,'circle');
+      center.setAttribute('cx',cx); center.setAttribute('cy',cy); center.setAttribute('r',80);
+      center.setAttribute('fill','#0b1224'); center.setAttribute('stroke','rgba(0,0,0,0.32)'); center.setAttribute('stroke-width','2');
+      svg.appendChild(center);
 
-      let start=-90;
-      const maxVal=Math.max(...values);
-
-      values.forEach((v,i)=>{
-        const end = start + 360*(v/total);
-        const mid = (start + end) / 2;
-        const pull = (v===maxVal) ? 6 : 4;
-
-        const path = document.createElementNS(svg.namespaceURI,'path');
-        path.setAttribute('class','slice');
-        path.setAttribute('fill',`url(#grad${i})`);
-        path.setAttribute('stroke','rgba(0,0,0,0.35)');
-        path.setAttribute('stroke-width','1');
-
-        // sweep animation (~1s)
-        let cur = start, step = (end-start)/60;
-        function animate(){
-          cur += step;
-          if(cur>end) cur=end;
-          path.setAttribute('d', arcD(cx,cy,rOuter,rInner,start,cur));
-          if(cur<end) requestAnimationFrame(animate);
-        }
-        animate();
-        svg.appendChild(path);
-
-        // hover pop-out + tooltip
-        const rad = (mid-90)*Math.PI/180;
-        const dx = pull * Math.cos(rad), dy = pull * Math.sin(rad);
-        path.addEventListener('mouseenter', ()=>{
-          path.style.transform = `translate(${dx}px, ${dy}px)`;
-          tip.innerHTML = `<strong>${labels[i]}</strong> — ${v}%`;
-          tip.style.opacity = '1';
-        });
-        path.addEventListener('mousemove', (e)=>{
-          const box = wrap.getBoundingClientRect();
-          tip.style.left = (e.clientX - box.left) + 'px';
-          tip.style.top  = (e.clientY - box.top)  + 'px';
-        });
-        path.addEventListener('mouseleave', ()=>{
-          path.style.transform = 'translate(0,0)';
-          tip.style.opacity = '0';
-        });
-
-        start = end;
-      });
-
-      // center
-      const hole=document.createElementNS(svg.namespaceURI,'circle');
-      hole.setAttribute('cx',cx); hole.setAttribute('cy',cy); hole.setAttribute('r',rInner-2);
-      hole.setAttribute('fill','#0b1224'); hole.setAttribute('stroke','var(--stroke)'); hole.setAttribute('stroke-width','1');
-      svg.appendChild(hole);
-
-      const t=document.createElementNS(svg.namespaceURI,'text');
-      t.setAttribute('x',cx); t.setAttribute('y',cy+5); t.setAttribute('text-anchor','middle');
-      t.setAttribute('font-size','18'); t.setAttribute('font-weight','800'); t.setAttribute('fill','#e5e7eb');
+      const t = document.createElementNS(svg.namespaceURI,'text');
+      t.setAttribute('x',cx); t.setAttribute('y',cy+6); t.setAttribute('text-anchor','middle');
+      t.setAttribute('font-size','22'); t.setAttribute('font-weight','800'); t.setAttribute('fill','#e5e7eb');
       t.textContent='SATJR'; svg.appendChild(t);
+
+      // slices
+      let cum = 0;
+      values.forEach((v,i)=>{
+        const pct = v/100;
+        const len = Math.max(0, C*pct - gapLen);
+        const off = C*(cum/100) + i*gapLen;
+        const arc = makeSlice(colors[i]);
+        arc.setAttribute('stroke-dashoffset', off);
+        g.appendChild(arc);
+
+        // radial animation (~650ms)
+        let t0 = performance.now();
+        function anim(ts){
+          const p = Math.min(1,(ts - t0)/650);
+          const ease = 1 - Math.pow(1-p, 3);
+          arc.setAttribute('stroke-dasharray', `${len*ease} ${C}`);
+          if(p<1) requestAnimationFrame(anim);
+        }
+        requestAnimationFrame(anim);
+
+        // tooltip
+        arc.addEventListener('mouseenter', ()=>{ tip.innerHTML = `<strong>${labels[i]}</strong> — ${v}%`; tip.style.opacity='1'; });
+        arc.addEventListener('mousemove', (e)=>{ const box = wrap.getBoundingClientRect(); tip.style.left=(e.clientX-box.left)+'px'; tip.style.top=(e.clientY-box.top)+'px'; });
+        arc.addEventListener('mouseleave', ()=>{ tip.style.opacity='0'; });
+
+        cum += v;
+      });
     })();
 
-    // start
+    // Start
     initContractBindings();
   </script>
 </body>
