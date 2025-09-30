@@ -22,16 +22,22 @@
 
   <style>
     :root{
-      --bg:#0f172a; --panel:#0b1224; --txt:#e5e7eb; --muted:#9ca3af;
+      --bg:#0f172a; --panel:#0b1224; --txt:#ffffff; --muted:#9ca3af;
       --brand:#f59e0b; --stroke:rgba(255,255,255,0.08);
       --ok:#16a34a; --danger:#ef4444;
+
+      /* cores do gráfico/barras */
+      --blue:#3b82f6; --yellow:#facc15; --red:#ef4444; --green:#22c55e; --purple:#a855f7;
     }
     *{box-sizing:border-box}
     html,body{
       margin:0; font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Ubuntu,Arial,sans-serif;
-      color:var(--txt); background:linear-gradient(180deg,var(--bg),#0b1022 60%, #090e1c 100%); scroll-behavior:smooth;
+      color:var(--txt);
+      background:linear-gradient(180deg,var(--bg),#0b1022 60%, #090e1c 100%);
+      scroll-behavior:smooth;
     }
-    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
     a:focus-visible,.btn:focus-visible,.btn-small:focus-visible,.burger:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
@@ -69,21 +75,26 @@
 
     /* Sections */
     section{padding:40px 0} section[id]{scroll-margin-top:90px}
-    h2{margin:0 0 16px;font-size:24px}
-    .title-brand{color:var(--brand);text-align:center;margin-bottom:16px}
+    h2{margin:0 0 16px;font-size:24px;color:var(--brand)} /* títulos padronizados */
     .card{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;padding:20px}
     .grid{display:grid;gap:16px}
     @media (min-width:860px){.grid-2{grid-template-columns:1fr 1fr}}
+
+    /* Auxiliares */
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .right{margin-left:auto}
+    .muted{color:var(--muted)}
+    .sp-8{height:8px}.sp-16{height:16px}
 
     /* Hero */
     .hero{padding:60px 0;border-bottom:1px solid var(--stroke)}
     .hero-grid{display:grid;gap:24px;align-items:center}
     @media (min-width:860px){.hero-grid{grid-template-columns:1.2fr .8fr}}
-    .hero h1{margin:0 0 10px;font-size:40px;line-height:1.08;font-weight:900}
+    .hero h1{margin:0 0 10px;font-size:40px;line-height:1.08;font-weight:900;color:var(--brand)}
     .hero .sub{color:var(--muted);margin-top:8px;max-width:680px}
     .hero img{width:100%;max-width:440px;border-radius:16px;border:1px solid var(--stroke);background:#0b1224}
 
-    /* Lists (facts & tokenomics left) */
+    /* Quick facts / tokenomics left */
     .tok-list{display:grid;gap:10px}
     .tok-item{display:flex;align-items:center;gap:12px;background:#0d1731;border:1px solid var(--stroke);border-radius:12px;padding:12px 14px}
     .tok-item>span:first-child{flex:0 0 200px}
@@ -91,30 +102,30 @@
     @media (max-width:540px){.tok-item>span:first-child{flex:0 0 150px}.tok-item>span:last-child{justify-content:flex-start;flex-wrap:wrap}}
     .pill{background:var(--brand);color:#1a1305;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 
-    /* Slim progress (tokenomics left) */
+    /* Slim progress bars */
     .right-wrap{display:flex;align-items:center;gap:10px;min-width:200px;justify-content:flex-end}
     .bar{position:relative;flex:1;height:6px;background:#0a142a;border-radius:999px;border:1px solid var(--stroke);overflow:hidden;max-width:220px}
     .bar .fill{position:absolute;inset:0;width:0%;transition:width .6s ease}
-    .blue .fill{background:#3b82f6} .yellow .fill{background:#facc15} .red .fill{background:#ef4444}
-    .green .fill{background:#22c55e} .purple .fill{background:#a855f7}
+    .blue .fill{background:var(--blue)} .yellow .fill{background:var(--yellow)} .red .fill{background:var(--red)}
+    .green .fill{background:var(--green)} .purple .fill{background:var(--purple)}
 
-    /* Donut clean (SVG strokes) */
+    /* Donut com arcos exatos (sem legenda abaixo) */
     .donut-wrap{position:relative;width:100%;max-width:460px;margin-inline:auto}
     svg.donut{width:100%;height:auto;display:block}
-    .donut .ring-bg{fill:none;stroke:#0b1224;stroke-width:42;opacity:.9;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
-    .donut .slice{fill:none;stroke-width:42;stroke-linecap:round;transition:stroke-width .15s ease,opacity .15s ease}
-    .donut .slice:hover{opacity:.95;stroke-width:44}
+    .donut .slice{fill:none;stroke-linecap:round;stroke-width:42;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+    .donut .center{fill:#0b1224;stroke:rgba(0,0,0,0.32);stroke-width:2}
+    .donut .label{font-size:22px;font-weight:800;fill:#e5e7eb}
     .donut-tooltip{
       position:absolute;left:0;top:0;pointer-events:none;background:#0d1731;border:1px solid var(--stroke);color:var(--txt);
       padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.2;filter:drop-shadow(0 6px 16px rgba(0,0,0,.3));
       opacity:0;display:none;transform:translate(-50%,-120%);transition:opacity .12s ease;white-space:nowrap;z-index:2;
     }
 
-    /* How to buy — layout clássico */
+    /* How to buy — volta ao layout correto */
     .htb-grid{display:grid;gap:16px;align-items:center}
     @media (min-width:860px){.htb-grid{grid-template-columns:1.2fr .8fr}}
     .steps{display:grid;gap:14px}
-    .step{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+    .step{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:center}
     .step-num{width:28px;height:28px;border-radius:999px;background:var(--brand);color:#1a1305;font-weight:900;display:flex;align-items:center;justify-content:center}
     .step p{margin:0}
     .cta-panel{display:grid;gap:12px;align-content:start;padding:14px 16px;border:1px solid var(--stroke);border-radius:12px;background:#0d1731}
@@ -123,14 +134,11 @@
 
     /* Team & footer */
     .team-wrap{display:flex;justify-content:center}
-    .team-card{max-width:760px;width:100%;background:#0c152a;border:1px solid var(--stroke);border-radius:18px;padding:24px;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+    .team-card{max-width:760px;width:100%;border:1px solid var(--stroke);border-radius:18px;padding:24px;text-align:center;background:#0c152a;box-shadow:0 6px 24px rgba(0,0,0,.25)}
     .team-name{font-weight:900;font-size:20px;margin:6px 0 10px}
     .team-desc{color:var(--txt);margin:0 auto 8px;max-width:680px}
     .team-links a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--brand);padding:8px 12px;border-radius:999px;font-weight:700}
     footer{border-top:1px solid var(--stroke);padding:28px 0 60px;color:var(--muted)}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .right{margin-left:auto}
-    .sp-8{height:8px}.sp-16{height:16px}
   </style>
 </head>
 <body>
@@ -208,7 +216,6 @@
           <p>There are no guarantees or expectations of profit. The goal is to foster a positive meme culture, make everything clear and public (distribution, treasury, liquidity), and let utilities and initiatives evolve with community input.</p>
           <p class="muted">SatoshiJr is an independent project not affiliated with any other cryptocurrencies, brands, or trademarks.</p>
         </div>
-
         <div class="card">
           <h2>Quick facts</h2>
           <ul class="tok-list" style="list-style:none;padding:0;margin:0">
@@ -236,7 +243,7 @@
         <div class="card">
           <h2>Tokenomics</h2>
           <div class="grid grid-2" style="align-items:center">
-            <!-- Left: list -->
+            <!-- Left: list + progress -->
             <div>
               <ul class="tok-list" style="list-style:none;padding:0;margin:0">
                 <li class="tok-item tok-progress blue" data-pct="40">
@@ -262,7 +269,7 @@
               </ul>
             </div>
 
-            <!-- Right: donut -->
+            <!-- Right: donut (sem legenda) -->
             <div class="donut-wrap">
               <svg id="donut" class="donut" viewBox="0 0 320 320" role="img" aria-label="Token distribution"></svg>
               <div class="donut-tooltip"></div>
@@ -278,14 +285,12 @@
         <div class="card">
           <h2>How to buy</h2>
           <div class="htb-grid">
-
             <div class="steps">
               <div class="step"><div class="step-num">1</div><p>Install a compatible wallet (e.g., MetaMask) and switch to the BNB Chain.</p></div>
               <div class="step"><div class="step-num">2</div><p>Fund your wallet with BNB for gas and trading.</p></div>
               <div class="step"><div class="step-num">3</div><p>Open your preferred DEX (e.g., PancakeSwap) and paste the SATJR contract address.</p></div>
               <div class="step"><div class="step-num">4</div><p>Set slippage if needed, review, and confirm the swap. Always double-check the contract address.</p></div>
             </div>
-
             <aside class="cta-panel">
               <p class="cta-tip">Tip: start with a small test swap to ensure the contract and liquidity are correct.</p>
               <a class="btn" id="openDex" target="_blank" rel="noopener"
@@ -293,7 +298,6 @@
                 Open PancakeSwap
               </a>
             </aside>
-
           </div>
         </div>
       </div>
@@ -316,13 +320,15 @@
     <!-- TEAM -->
     <section id="team">
       <div class="container">
-        <h2 class="title-brand">Team</h2>
-        <div class="team-wrap">
-          <div class="team-card">
-            <div class="team-name">Evaldo Américo Jr. — Founder &amp; Developer</div>
-            <p class="team-desc">Founder and developer of SatoshiJr, responsible for the token creation, website and community growth.</p>
-            <div class="team-contact">Contact: <a href="mailto:team@satoshijr.xyz">team@satoshijr.xyz</a></div>
-            <div class="team-links"><a href="https://github.com/evaldoamericojr-cmd" target="_blank" rel="noopener">GitHub Profile</a></div>
+        <div class="card">
+          <h2>Team</h2>
+          <div class="team-wrap">
+            <div class="team-card">
+              <div class="team-name">Evaldo Américo Jr. — Founder &amp; Developer</div>
+              <p class="team-desc">Founder and developer of SatoshiJr, responsible for the token creation, website and community growth.</p>
+              <div class="team-contact">Contact: <a href="mailto:team@satoshijr.xyz">team@satoshijr.xyz</a></div>
+              <div class="team-links"><a href="https://github.com/evaldoamericojr-cmd" target="_blank" rel="noopener">GitHub Profile</a></div>
+            </div>
           </div>
         </div>
       </div>
@@ -331,9 +337,8 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="container row" style="align-items:flex-start;gap:12px">
-      <span>© 2025 SatoshiJr — The meme heir • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.</span>
-      <a class="right" href="https://x.com/satoshijrcoin" target="_blank" rel="noopener">X / Twitter</a>
+    <div class="container">
+      © 2025 SatoshiJr — The meme heir • Not affiliated with Satoshi Nakamoto or Bitcoin Foundation.
     </div>
   </footer>
 
@@ -342,6 +347,17 @@
     const CONTRACT = '0x1C4171fDCE7C9c8E1cBDe06C6d45747cB0Ef9b54';
     const BSCSCAN_URL = `https://bscscan.com/token/${CONTRACT}`;
     const PANCAKE_URL = `https://pancakeswap.finance/swap?outputCurrency=${CONTRACT}`;
+
+    // dados unificados (barras + donut)
+    const TOKE_DATA = [
+      { label:'Initial Liquidity', value:40, color:getVar('--blue')   },
+      { label:'Founder',           value:20, color:getVar('--yellow') },
+      { label:'Marketing & Community', value:20, color:getVar('--red') },
+      { label:'Staking & Rewards', value:10, color:getVar('--green')  },
+      { label:'Strategic Reserve', value:10, color:getVar('--purple') },
+    ];
+
+    function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
     // ======= ELEMENTS =======
     const toast = document.getElementById('toast');
@@ -397,98 +413,75 @@
       const pct = Number(li.getAttribute('data-pct')||0);
       const fill = li.querySelector('.fill');
       fill.style.width = '0%';
-      setTimeout(()=>{ fill.style.width = Math.min(Math.max(pct,0),100)+'%'; }, 120*i);
+      requestAnimationFrame(()=>{ setTimeout(()=>{ fill.style.width = Math.min(Math.max(pct,0),100)+'%'; }, 120*i); });
     });
 
-    // ======= DONUT (proporção exata + fechamento + tooltip) =======
+    // ======= DONUT COM ARCOS PRECISOS =======
     (function buildDonut(){
-      const labels = ['Initial Liquidity','Founder','Marketing & Community','Staking & Rewards','Strategic Reserve'];
-      const values = [40,20,20,10,10]; // soma = 100
-      const colors = ['#3b82f6','#facc15','#ef4444','#22c55e','#a855f7'];
-
       const svg = document.getElementById('donut');
-      const wrap = svg.parentElement;
       while (svg.firstChild) svg.removeChild(svg.firstChild);
+      const tip = svg.parentElement.querySelector('.donut-tooltip');
 
-      const tip = wrap.querySelector('.donut-tooltip');
+      const cx=160, cy=160, R=110, innerR=80;
+      const thickness = 42;
+      const startAt = -90;              // começa às 12h
+      const gapDeg = 2;                 // gap em graus
 
-      const cx=160, cy=160, R=110;
-      const C = 2*Math.PI*R;                // circ total
-      const gapDeg = 2;                     // gap visual (graus)
-      const gapLen = C * (gapDeg/360);      // gap px/fatia
-      const gapsTotal = gapLen * values.length;
-      const usable = C - gapsTotal;         // comprimento útil
-
-      // fundo
-      const bg = document.createElementNS(svg.namespaceURI,'circle');
-      bg.setAttribute('class','ring-bg'); bg.setAttribute('cx',cx); bg.setAttribute('cy',cy); bg.setAttribute('r',R);
-      svg.appendChild(bg);
-
-      // grupo rotacionado (start 12h)
-      const g = document.createElementNS(svg.namespaceURI,'g');
-      g.setAttribute('transform',`rotate(-90,${cx},${cy})`);
-      svg.appendChild(g);
-
-      function mkSlice(color, dashOffset){
-        const c = document.createElementNS(svg.namespaceURI,'circle');
-        c.setAttribute('class','slice');
-        c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',R);
-        c.setAttribute('stroke',color);
-        c.setAttribute('stroke-dashoffset', dashOffset);
-        c.setAttribute('stroke-dasharray', `0 ${C}`); // anima de 0
-        return c;
-      }
-
-      // centro + label
-      const center = document.createElementNS(svg.namespaceURI,'circle');
-      center.setAttribute('cx',cx); center.setAttribute('cy',cy); center.setAttribute('r',80);
-      center.setAttribute('fill','#0b1224'); center.setAttribute('stroke','rgba(0,0,0,0.32)'); center.setAttribute('stroke-width','2');
+      // centro
+      const center = el('circle',{cx,cy,r:innerR,class:'center'});
       svg.appendChild(center);
+      const label = el('text',{x:cx,y:cy+6,'text-anchor':'middle',class:'label'});
+      label.textContent = 'SATJR';
+      svg.appendChild(label);
 
-      const ct = document.createElementNS(svg.namespaceURI,'text');
-      ct.setAttribute('x',cx); ct.setAttribute('y',cy+6); ct.setAttribute('text-anchor','middle');
-      ct.setAttribute('font-size','22'); ct.setAttribute('font-weight','800'); ct.setAttribute('fill','#e5e7eb');
-      ct.textContent='SATJR'; svg.appendChild(ct);
+      // soma para validar 100%
+      const total = TOKE_DATA.reduce((s,d)=>s+d.value,0) || 1;
 
-      // comprimentos proporcionais
-      let dashOffset = 0;
-      const lens = values.map(v => usable * (v/100));
-      const sumLens = lens.reduce((a,b)=>a+b,0);
-      lens[lens.length-1] += (usable - sumLens); // fecha o ciclo
+      let angle = startAt;
+      TOKE_DATA.forEach((d)=>{
+        const arcDeg = (d.value/total)*360 - gapDeg;   // reserva um gap fixo
+        const a0 = angle + gapDeg/2;
+        const a1 = a0 + Math.max(0, arcDeg);
 
-      lens.forEach((len,i)=>{
-        const slice = mkSlice(colors[i], dashOffset);
-        g.appendChild(slice);
+        const path = donutArcPath(cx,cy,R,thickness,a0,a1);
+        const p = el('path',{d:path, class:'slice', stroke:d.color, 'stroke-linecap':'round', fill:'none'});
+        svg.appendChild(p);
 
-        // animação radial (~650ms) ease-out
-        let t0 = performance.now();
-        function anim(ts){
-          const p = Math.min(1,(ts - t0)/650);
-          const ease = 1 - Math.pow(1-p, 3);
-          slice.setAttribute('stroke-dasharray', `${len*ease} ${C}`);
-          if(p<1) requestAnimationFrame(anim);
-        }
-        requestAnimationFrame(anim);
-
-        // tooltip controlado
-        slice.addEventListener('mouseenter', ()=>{
-          tip.textContent = `${labels[i]} — ${values[i]}%`;
-          tip.style.display = 'block';
-          tip.style.opacity  = '1';
+        // tooltip
+        p.addEventListener('mouseenter', ()=>{
+          tip.textContent = `${d.label} — ${d.value}%`;
+          tip.style.display = 'block'; tip.style.opacity='1';
         });
-        slice.addEventListener('mousemove', (e)=>{
-          const box = wrap.getBoundingClientRect();
+        p.addEventListener('mousemove', (e)=>{
+          const box = svg.getBoundingClientRect();
           tip.style.left = (e.clientX - box.left) + 'px';
           tip.style.top  = (e.clientY - box.top)  + 'px';
         });
-        slice.addEventListener('mouseleave', ()=>{
-          tip.style.opacity = '0';
-          tip.style.display = 'none';
+        p.addEventListener('mouseleave', ()=>{
+          tip.style.opacity='0'; tip.style.display='none';
         });
 
-        dashOffset += len + gapLen; // avança: fatia + gap
+        angle = a1 + gapDeg/2;
       });
     })();
+
+    function el(name, attrs){ const n=document.createElementNS('http://www.w3.org/2000/svg',name); for(const k in attrs) n.setAttribute(k, attrs[k]); return n; }
+    function polar(cx,cy,r,deg){ const rad=(deg*Math.PI)/180; return {x:cx + r*Math.cos(rad), y:cy + r*Math.sin(rad)};}
+    // arco anular (entre R e R-thickness)
+    function donutArcPath(cx,cy,R,th,deg0,deg1){
+      const rOuter = R, rInner = R - th;
+      const p0o = polar(cx,cy,rOuter,deg0), p1o = polar(cx,cy,rOuter,deg1);
+      const p0i = polar(cx,cy,rInner,deg0), p1i = polar(cx,cy,rInner,deg1);
+      const large = (deg1-deg0) > 180 ? 1 : 0;
+      // caminho fechado de anel (sentido horário)
+      return [
+        `M ${p0o.x} ${p0o.y}`,
+        `A ${rOuter} ${rOuter} 0 ${large} 1 ${p1o.x} ${p1o.y}`,
+        `L ${p1i.x} ${p1i.y}`,
+        `A ${rInner} ${rInner} 0 ${large} 0 ${p0i.x} ${p0i.y}`,
+        'Z'
+      ].join(' ');
+    }
 
     // Start
     initContractBindings();
