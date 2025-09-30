@@ -24,7 +24,7 @@
     :root{
       --bg:#0f172a; --panel:#0b1224; --txt:#ffffff; --muted:#9ca3af;
       --brand:#f59e0b; --stroke:rgba(255,255,255,0.08);
-      --ok:#16a34a; --danger:#ef4444;
+      --ok:#16a34a;
 
       /* cores do gráfico/barras */
       --blue:#3b82f6; --yellow:#facc15; --red:#ef4444; --green:#22c55e; --purple:#a855f7;
@@ -109,19 +109,27 @@
     .blue .fill{background:var(--blue)} .yellow .fill{background:var(--yellow)} .red .fill{background:var(--red)}
     .green .fill{background:var(--green)} .purple .fill{background:var(--purple)}
 
-    /* Donut com arcos exatos (sem legenda abaixo) */
-    .donut-wrap{position:relative;width:100%;max-width:460px;margin-inline:auto}
+    /* Donut — estilo do print (arcos reais, gaps, terminais arredondados, anel interno escuro) */
+    .donut-wrap{position:relative;width:100%;max-width:520px;margin-inline:auto}
     svg.donut{width:100%;height:auto;display:block}
-    .donut .slice{fill:none;stroke-linecap:round;stroke-width:42;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
-    .donut .center{fill:#0b1224;stroke:rgba(0,0,0,0.32);stroke-width:2}
-    .donut .label{font-size:22px;font-weight:800;fill:#e5e7eb}
+    .donut .slice{
+      fill:none;
+      stroke-linecap:round;
+      stroke-width:44; /* espessura do anel (ajuste se quiser) */
+      filter:drop-shadow(0 6px 18px rgba(0,0,0,.35));
+    }
+    .donut .inner-ring{
+      fill:#0b1224; stroke:#0a1022; stroke-width:6; /* borda do “miolo” para dar o relevo */
+      filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));
+    }
+    .donut .label{font-size:28px;font-weight:900;fill:#e5e7eb;letter-spacing:.6px}
     .donut-tooltip{
       position:absolute;left:0;top:0;pointer-events:none;background:#0d1731;border:1px solid var(--stroke);color:var(--txt);
       padding:6px 8px;border-radius:8px;font-size:12px;line-height:1.2;filter:drop-shadow(0 6px 16px rgba(0,0,0,.3));
       opacity:0;display:none;transform:translate(-50%,-120%);transition:opacity .12s ease;white-space:nowrap;z-index:2;
     }
 
-    /* How to buy — volta ao layout correto */
+    /* How to buy */
     .htb-grid{display:grid;gap:16px;align-items:center}
     @media (min-width:860px){.htb-grid{grid-template-columns:1.2fr .8fr}}
     .steps{display:grid;gap:14px}
@@ -269,7 +277,7 @@
               </ul>
             </div>
 
-            <!-- Right: donut (sem legenda) -->
+            <!-- Right: donut -->
             <div class="donut-wrap">
               <svg id="donut" class="donut" viewBox="0 0 320 320" role="img" aria-label="Token distribution"></svg>
               <div class="donut-tooltip"></div>
@@ -350,14 +358,13 @@
 
     // dados unificados (barras + donut)
     const TOKE_DATA = [
-      { label:'Initial Liquidity', value:40, color:getVar('--blue')   },
-      { label:'Founder',           value:20, color:getVar('--yellow') },
-      { label:'Marketing & Community', value:20, color:getVar('--red') },
-      { label:'Staking & Rewards', value:10, color:getVar('--green')  },
-      { label:'Strategic Reserve', value:10, color:getVar('--purple') },
+      { label:'Initial Liquidity',   value:40, color:css('--blue')   },
+      { label:'Founder',             value:20, color:css('--yellow') },
+      { label:'Marketing & Community', value:20, color:css('--red')  },
+      { label:'Staking & Rewards',   value:10, color:css('--green')  },
+      { label:'Strategic Reserve',   value:10, color:css('--purple') },
     ];
-
-    function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+    function css(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
     // ======= ELEMENTS =======
     const toast = document.getElementById('toast');
@@ -416,72 +423,71 @@
       requestAnimationFrame(()=>{ setTimeout(()=>{ fill.style.width = Math.min(Math.max(pct,0),100)+'%'; }, 120*i); });
     });
 
-    // ======= DONUT COM ARCOS PRECISOS =======
+    // ======= DONUT (arcos reais + gaps + anel interno) =======
     (function buildDonut(){
       const svg = document.getElementById('donut');
       while (svg.firstChild) svg.removeChild(svg.firstChild);
       const tip = svg.parentElement.querySelector('.donut-tooltip');
 
-      const cx=160, cy=160, R=110, innerR=80;
-      const thickness = 42;
-      const startAt = -90;              // começa às 12h
-      const gapDeg = 2;                 // gap em graus
+      // geometria
+      const cx=160, cy=160;
+      const ringWidth = 44;       // deve acompanhar .slice stroke-width
+      const R = 110;              // raio do “traço”
+      const innerR = R - ringWidth/2 - 3; // raio do círculo interno
+      const startDeg = -90;       // inicia às 12h
+      const gapDeg   = 8;         // gap do print (pode ajustar 6–10)
 
-      // centro
-      const center = el('circle',{cx,cy,r:innerR,class:'center'});
-      svg.appendChild(center);
-      const label = el('text',{x:cx,y:cy+6,'text-anchor':'middle',class:'label'});
-      label.textContent = 'SATJR';
-      svg.appendChild(label);
+      // anel interno (miolo escuro com leve borda)
+      svg.appendChild(el('circle',{cx,cy,r:innerR,class:'inner-ring'}));
 
-      // soma para validar 100%
+      // label central
+      const label = el('text',{x:cx,y:cy+8,'text-anchor':'middle',class:'label'});
+      label.textContent = 'SATJR'; svg.appendChild(label);
+
       const total = TOKE_DATA.reduce((s,d)=>s+d.value,0) || 1;
 
-      let angle = startAt;
+      let a = startDeg;
       TOKE_DATA.forEach((d)=>{
-        const arcDeg = (d.value/total)*360 - gapDeg;   // reserva um gap fixo
-        const a0 = angle + gapDeg/2;
-        const a1 = a0 + Math.max(0, arcDeg);
+        // ângulo da fatia menos gap para ficar com “respiro” entre segmentos
+        const sweep = (d.value/total)*360 - gapDeg;
+        const a0=a + gapDeg/2;
+        const a1=a0 + Math.max(0, sweep);
 
-        const path = donutArcPath(cx,cy,R,thickness,a0,a1);
-        const p = el('path',{d:path, class:'slice', stroke:d.color, 'stroke-linecap':'round', fill:'none'});
+        // path do arco
+        const p = el('path',{ d: arcPath(cx,cy,R,a0,a1), class:'slice', stroke:d.color });
+        // anima por comprimento
+        const len = arcLen(R,a0,a1);
+        p.setAttribute('pathLength', len);
+        p.setAttribute('stroke-dasharray', `0 ${len}`);
         svg.appendChild(p);
 
-        // tooltip
-        p.addEventListener('mouseenter', ()=>{
-          tip.textContent = `${d.label} — ${d.value}%`;
-          tip.style.display = 'block'; tip.style.opacity='1';
-        });
-        p.addEventListener('mousemove', (e)=>{
-          const box = svg.getBoundingClientRect();
-          tip.style.left = (e.clientX - box.left) + 'px';
-          tip.style.top  = (e.clientY - box.top)  + 'px';
-        });
-        p.addEventListener('mouseleave', ()=>{
-          tip.style.opacity='0'; tip.style.display='none';
-        });
+        // animação suave
+        let t0 = performance.now();
+        (function anim(ts){
+          const z = Math.min(1,(ts - t0)/700);
+          const ease = 1 - Math.pow(1-z, 3);
+          p.setAttribute('stroke-dasharray', `${len*ease} ${len}`);
+          if(z<1) requestAnimationFrame(anim);
+        })(t0);
 
-        angle = a1 + gapDeg/2;
+        // tooltip
+        p.addEventListener('mouseenter', ()=>{ tip.textContent = `${d.label} — ${d.value}%`; tip.style.display='block'; tip.style.opacity='1'; });
+        p.addEventListener('mousemove', (e)=>{ const b=svg.getBoundingClientRect(); tip.style.left=(e.clientX-b.left)+'px'; tip.style.top=(e.clientY-b.top)+'px'; });
+        p.addEventListener('mouseleave', ()=>{ tip.style.opacity='0'; tip.style.display='none'; });
+
+        a = a1 + gapDeg/2;
       });
     })();
 
+    // helpers SVG
     function el(name, attrs){ const n=document.createElementNS('http://www.w3.org/2000/svg',name); for(const k in attrs) n.setAttribute(k, attrs[k]); return n; }
-    function polar(cx,cy,r,deg){ const rad=(deg*Math.PI)/180; return {x:cx + r*Math.cos(rad), y:cy + r*Math.sin(rad)};}
-    // arco anular (entre R e R-thickness)
-    function donutArcPath(cx,cy,R,th,deg0,deg1){
-      const rOuter = R, rInner = R - th;
-      const p0o = polar(cx,cy,rOuter,deg0), p1o = polar(cx,cy,rOuter,deg1);
-      const p0i = polar(cx,cy,rInner,deg0), p1i = polar(cx,cy,rInner,deg1);
+    function polar(cx,cy,r,deg){ const rad = (deg*Math.PI)/180; return {x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad)}; }
+    function arcPath(cx,cy,r,deg0,deg1){
+      const p0 = polar(cx,cy,r,deg0), p1 = polar(cx,cy,r,deg1);
       const large = (deg1-deg0) > 180 ? 1 : 0;
-      // caminho fechado de anel (sentido horário)
-      return [
-        `M ${p0o.x} ${p0o.y}`,
-        `A ${rOuter} ${rOuter} 0 ${large} 1 ${p1o.x} ${p1o.y}`,
-        `L ${p1i.x} ${p1i.y}`,
-        `A ${rInner} ${rInner} 0 ${large} 0 ${p0i.x} ${p0i.y}`,
-        'Z'
-      ].join(' ');
+      return `M ${p0.x} ${p0.y} A ${r} ${r} 0 ${large} 1 ${p1.x} ${p1.y}`;
     }
+    function arcLen(r,deg0,deg1){ return (Math.abs(deg1-deg0) * Math.PI/180) * r; }
 
     // Start
     initContractBindings();
